@@ -1,0 +1,441 @@
+<tree schema_version="1.0">
+    <sourceName>Kinetic Request</sourceName>
+    <sourceGroup>Data Management > Notification Manager</sourceGroup>
+    <type>Tree</type>
+    <status>Active</status>
+    <taskTree builder_version="4.0.1" schema_version="1.0" version="">
+          <name>Notification Entry</name>
+          <author/>
+          <notes/>
+          <lastID>17</lastID>
+          <request>
+            <task definition_id="system_start_v1" id="start" name="Start" x="10" y="10">
+              <version>1</version>
+              <configured>true</configured>
+              <defers>false</defers>
+              <deferrable>false</deferrable>
+              <visible>false</visible>
+              <parameters/>
+              <messages/>
+              <dependents>
+                
+                
+              <task type="Complete" label="" value="">kinetic_helper_record_find_v5_14</task><task type="Complete" label="Predefined recipient" value="@answers['Predefined Recipient']==&quot;Predefined recipient&quot;">kinetic_helper_record_find_v5_15</task></dependents>
+            </task>
+            
+            <task definition_id="kinetic_helper_record_update_v2" id="kinetic_helper_record_update_v2_2" name="Update existing content record" x="23.109375" y="232.53125">
+              <version>2</version>
+              <configured>true</configured>
+              <defers>false</defers>
+              <deferrable>false</deferrable>
+              <visible>false</visible>
+              <parameters>
+                <parameter id="Request ID" label="Request ID" menu="" required="true" tooltip="Enter the Request ID, stored in Request ID of the KS_SRV_Helper form">
+                  &lt;%=@results['Look for existing notification content
+                  records']['Entry Id']%&gt;
+                </parameter>
+                <parameter id="Status" label="Status" menu="Active,Inactive,Delete" required="true" tooltip="Enter the Request ID, stored in Request ID of the KS_SRV_Helper form">Active</parameter>
+                <parameter id="SurveyInstanceID" label="SurveyInstanceID" menu="" required="false" tooltip="SurveyInstanceID"/>
+                <parameter id="CustomerSurveyInstanceID" label="CustomerSurveyInstanceID" menu="" required="false" tooltip="CustomerSurveyInstanceID"/>
+                <parameter id="Index Field1" label="Index Field1" menu="" required="false" tooltip="Index Field1"/>
+                <parameter id="Index Field2" label="Index Field1" menu="" required="false" tooltip="Index Field2"/>
+                <parameter id="Index Field3" label="Index Field1" menu="" required="false" tooltip="Index Field3"/>
+                <parameter id="Character Field1" label="Character Field1" menu="" required="false" tooltip="Character Field1"/>
+                <parameter id="Character Field2" label="Character Field2" menu="" required="false" tooltip="Character Field2"/>
+                <parameter id="Character Field3" label="Character Field3" menu="" required="false" tooltip="Character Field3"/>
+                <parameter id="Character Field4" label="Character Field4" menu="" required="false" tooltip="Character Field4"/>
+                <parameter id="Character Field5" label="Character Field5" menu="" required="false" tooltip="Character Field5"/>
+                <parameter id="Character Field6" label="Character Field6" menu="" required="false" tooltip="Character Field6"/>
+                <parameter id="Character Field7" label="Character Field7" menu="" required="false" tooltip="Character Field7"/>
+                <parameter id="Character Field8" label="Character Field8" menu="" required="false" tooltip="Character Field8"/>
+                <parameter id="Character Field9" label="Character Field9" menu="" required="false" tooltip="Character Field9"/>
+                <parameter id="Character Field10" label="Character Field10" menu="" required="false" tooltip="Character Field10"/>
+                <parameter id="Character Field11" label="Character Field11" menu="" required="false" tooltip="Character Field11"/>
+                <parameter id="Character Field12" label="Character Field12" menu="" required="false" tooltip="Character Field12"/>
+                <parameter id="Character Field13" label="Character Field13" menu="" required="false" tooltip="Character Field13">&lt;%=@answers['Subject Line']%&gt;</parameter>
+                <parameter id="Character Field14" label="Character Field14" menu="" required="false" tooltip="Character Field14">&lt;%=@answers['Message Body']%&gt;</parameter>
+                <parameter id="Integer Field1" label="Integer Field1" menu="" required="false" tooltip="Integer Field1"/>
+                <parameter id="Integer Field2" label="Integer Field2" menu="" required="false" tooltip="Integer Field2"/>
+                <parameter id="Integer Field3" label="Integer Field3" menu="" required="false" tooltip="Integer Field3"/>
+                <parameter id="Integer Field4" label="Integer Field4" menu="" required="false" tooltip="Integer Field4"/>
+                <parameter id="Integer Field5" label="Integer Field5" menu="" required="false" tooltip="Integer Field5"/>
+                <parameter id="Integer Field6" label="Integer Field6" menu="" required="false" tooltip="Integer Field6"/>
+                <parameter id="Date Field1" label="Date Field1" menu="" required="false" tooltip="Date Field1"/>
+                <parameter id="Date Field2" label="Date Field2" menu="" required="false" tooltip="Date Field2"/>
+                <parameter id="Date Field3" label="Date Field3" menu="" required="false" tooltip="Date Field3"/>
+                <parameter id="Date Field4" label="Date Field4" menu="" required="false" tooltip="Date Field4"/>
+                <parameter id="Date Field5" label="Date Field5" menu="" required="false" tooltip="Date Field5"/>
+                <parameter id="Date Field6" label="Date Field6" menu="" required="false" tooltip="Date Field6"/>
+                <parameter id="Date Field7" label="Date Field7" menu="" required="false" tooltip="Date Field7"/>
+                <parameter id="Date/Time Field1" label="Date/Time Field1" menu="" required="false" tooltip="Date/Time Field1"/>
+                <parameter id="Date/Time Field2" label="Date/Time Field2" menu="" required="false" tooltip="Date/Time Field2"/>
+                <parameter id="Date/Time Field3" label="Date/Time Field3" menu="" required="false" tooltip="Date/Time Field3"/>
+                <parameter id="Date/Time Field4" label="Date/Time Field4" menu="" required="false" tooltip="Date/Time Field4"/>
+                <parameter id="Date/Time Field5" label="Date/Time Field5" menu="" required="false" tooltip="Date/Time Field5"/>
+                <parameter id="Date/Time Field6" label="Date/Time Field6" menu="" required="false" tooltip="Date/Time Field6"/>
+                <parameter id="Date/Time Field7" label="Date/Time Field7" menu="" required="false" tooltip="Date/Time Field7"/>
+                <parameter id="Time Field1" label="Time Field1" menu="" required="false" tooltip="Time Field1"/>
+                <parameter id="Time Field2" label="Time Field2" menu="" required="false" tooltip="Time Field2"/>
+                <parameter id="Time Field3" label="Time Field3" menu="" required="false" tooltip="Time Field3"/>
+                <parameter id="Time Field4" label="Time Field4" menu="" required="false" tooltip="Time Field4"/>
+                <parameter id="Time Field5" label="Time Field5" menu="" required="false" tooltip="Time Field5"/>
+                <parameter id="Time Field6" label="Time Field6" menu="" required="false" tooltip="Time Field6"/>
+                <parameter id="Time Field7" label="Time Field7" menu="" required="false" tooltip="Time Field7"/>
+              </parameters>
+              <messages>
+                <message type="Create"/>
+                <message type="Update"/>
+                <message type="Complete"/>
+              </messages>
+              <dependents>
+                <task label="" type="Complete" value="">system_join_v1_10</task>
+              </dependents>
+            </task>
+            
+            
+            
+            <task definition_id="kinetic_helper_record_update_v2" id="kinetic_helper_record_update_v2_8" name="Update existing recipient record" x="433" y="173">
+              <version>2</version>
+              <configured>true</configured>
+              <defers>false</defers>
+              <deferrable>false</deferrable>
+              <visible>false</visible>
+              <parameters>
+                <parameter id="Request ID" label="Request ID" menu="" required="true" tooltip="Enter the Request ID, stored in Request ID of the KS_SRV_Helper form">
+                  &lt;%=@results['Look for existing notification content
+                  records']['Entry Id']%&gt;
+                </parameter>
+                <parameter id="Status" label="Status" menu="Active,Inactive,Delete" required="true" tooltip="Enter the Request ID, stored in Request ID of the KS_SRV_Helper form">Active</parameter>
+                <parameter id="SurveyInstanceID" label="SurveyInstanceID" menu="" required="false" tooltip="SurveyInstanceID"/>
+                <parameter id="CustomerSurveyInstanceID" label="CustomerSurveyInstanceID" menu="" required="false" tooltip="CustomerSurveyInstanceID"/>
+                <parameter id="Index Field1" label="Index Field1" menu="" required="false" tooltip="Index Field1"/>
+                <parameter id="Index Field2" label="Index Field1" menu="" required="false" tooltip="Index Field2"/>
+                <parameter id="Index Field3" label="Index Field1" menu="" required="false" tooltip="Index Field3"/>
+                <parameter id="Character Field1" label="Character Field1" menu="" required="false" tooltip="Character Field1">&lt;%=@answers['Recipient Type']%&gt;</parameter>
+                <parameter id="Character Field2" label="Character Field2" menu="" required="false" tooltip="Character Field2"/>
+                <parameter id="Character Field3" label="Character Field3" menu="" required="false" tooltip="Character Field3"/>
+                <parameter id="Character Field4" label="Character Field4" menu="" required="false" tooltip="Character Field4"/>
+                <parameter id="Character Field5" label="Character Field5" menu="" required="false" tooltip="Character Field5"/>
+                <parameter id="Character Field6" label="Character Field6" menu="" required="false" tooltip="Character Field6"/>
+                <parameter id="Character Field7" label="Character Field7" menu="" required="false" tooltip="Character Field7"/>
+                <parameter id="Character Field8" label="Character Field8" menu="" required="false" tooltip="Character Field8"/>
+                <parameter id="Character Field9" label="Character Field9" menu="" required="false" tooltip="Character Field9"/>
+                <parameter id="Character Field10" label="Character Field10" menu="" required="false" tooltip="Character Field10"/>
+                <parameter id="Character Field11" label="Character Field11" menu="" required="false" tooltip="Character Field11"/>
+                <parameter id="Character Field12" label="Character Field12" menu="" required="false" tooltip="Character Field12"/>
+                <parameter id="Character Field13" label="Character Field13" menu="" required="false" tooltip="Character Field13">&lt;%=@answers['Recipient Value']%&gt;</parameter>
+                <parameter id="Character Field14" label="Character Field14" menu="" required="false" tooltip="Character Field14"/>
+                <parameter id="Integer Field1" label="Integer Field1" menu="" required="false" tooltip="Integer Field1"/>
+                <parameter id="Integer Field2" label="Integer Field2" menu="" required="false" tooltip="Integer Field2"/>
+                <parameter id="Integer Field3" label="Integer Field3" menu="" required="false" tooltip="Integer Field3"/>
+                <parameter id="Integer Field4" label="Integer Field4" menu="" required="false" tooltip="Integer Field4"/>
+                <parameter id="Integer Field5" label="Integer Field5" menu="" required="false" tooltip="Integer Field5"/>
+                <parameter id="Integer Field6" label="Integer Field6" menu="" required="false" tooltip="Integer Field6"/>
+                <parameter id="Date Field1" label="Date Field1" menu="" required="false" tooltip="Date Field1"/>
+                <parameter id="Date Field2" label="Date Field2" menu="" required="false" tooltip="Date Field2"/>
+                <parameter id="Date Field3" label="Date Field3" menu="" required="false" tooltip="Date Field3"/>
+                <parameter id="Date Field4" label="Date Field4" menu="" required="false" tooltip="Date Field4"/>
+                <parameter id="Date Field5" label="Date Field5" menu="" required="false" tooltip="Date Field5"/>
+                <parameter id="Date Field6" label="Date Field6" menu="" required="false" tooltip="Date Field6"/>
+                <parameter id="Date Field7" label="Date Field7" menu="" required="false" tooltip="Date Field7"/>
+                <parameter id="Date/Time Field1" label="Date/Time Field1" menu="" required="false" tooltip="Date/Time Field1"/>
+                <parameter id="Date/Time Field2" label="Date/Time Field2" menu="" required="false" tooltip="Date/Time Field2"/>
+                <parameter id="Date/Time Field3" label="Date/Time Field3" menu="" required="false" tooltip="Date/Time Field3"/>
+                <parameter id="Date/Time Field4" label="Date/Time Field4" menu="" required="false" tooltip="Date/Time Field4"/>
+                <parameter id="Date/Time Field5" label="Date/Time Field5" menu="" required="false" tooltip="Date/Time Field5"/>
+                <parameter id="Date/Time Field6" label="Date/Time Field6" menu="" required="false" tooltip="Date/Time Field6"/>
+                <parameter id="Date/Time Field7" label="Date/Time Field7" menu="" required="false" tooltip="Date/Time Field7"/>
+                <parameter id="Time Field1" label="Time Field1" menu="" required="false" tooltip="Time Field1"/>
+                <parameter id="Time Field2" label="Time Field2" menu="" required="false" tooltip="Time Field2"/>
+                <parameter id="Time Field3" label="Time Field3" menu="" required="false" tooltip="Time Field3"/>
+                <parameter id="Time Field4" label="Time Field4" menu="" required="false" tooltip="Time Field4"/>
+                <parameter id="Time Field5" label="Time Field5" menu="" required="false" tooltip="Time Field5"/>
+                <parameter id="Time Field6" label="Time Field6" menu="" required="false" tooltip="Time Field6"/>
+                <parameter id="Time Field7" label="Time Field7" menu="" required="false" tooltip="Time Field7"/>
+              </parameters>
+              <messages>
+                <message type="Create"/>
+                <message type="Update"/>
+                <message type="Complete"/>
+              </messages>
+              <dependents>
+                <task label="" type="Complete" value="">system_join_v1_9</task>
+              </dependents>
+            </task>
+            <task definition_id="system_join_v1" id="system_join_v1_9" name="Join: Recipient" x="566.261348724365" y="302.196014404297">
+              <version>1</version>
+              <configured>true</configured>
+              <defers>false</defers>
+              <deferrable>false</deferrable>
+              <visible>false</visible>
+              <parameters>
+                <parameter id="type" label="Type:" menu="All,Any,Some" required="true" tooltip="How many dependents must be completed before continuing?">Any</parameter>
+                <parameter dependsOnId="type" dependsOnValue="Some" id="number" label="Number:" menu="" required="false" tooltip="If some, how many?"/>
+              </parameters>
+              <messages>
+                <message type="Create"/>
+                <message type="Update"/>
+                <message type="Complete"/>
+              </messages>
+              <dependents>
+                <task label="" type="Complete" value="">system_join_v1_11</task>
+              </dependents>
+            </task>
+            <task definition_id="system_join_v1" id="system_join_v1_10" name="Join: Content" x="118.338069915771" y="325.678955078125">
+              <version>1</version>
+              <configured>true</configured>
+              <defers>false</defers>
+              <deferrable>false</deferrable>
+              <visible>false</visible>
+              <parameters>
+                <parameter id="type" label="Type:" menu="All,Any,Some" required="true" tooltip="How many dependents must be completed before continuing?">Any</parameter>
+                <parameter dependsOnId="type" dependsOnValue="Some" id="number" label="Number:" menu="" required="false" tooltip="If some, how many?"/>
+              </parameters>
+              <messages>
+                <message type="Create"/>
+                <message type="Update"/>
+                <message type="Complete"/>
+              </messages>
+              <dependents>
+                <task label="" type="Complete" value="">system_join_v1_11</task>
+              </dependents>
+            </task>
+            <task definition_id="system_join_v1" id="system_join_v1_11" name="Join" x="360.426113128662" y="450.988647460938">
+              <version>1</version>
+              <configured>true</configured>
+              <defers>false</defers>
+              <deferrable>false</deferrable>
+              <visible>false</visible>
+              <parameters>
+                <parameter id="type" label="Type:" menu="All,Any,Some" required="true" tooltip="How many dependents must be completed before continuing?">All</parameter>
+                <parameter dependsOnId="type" dependsOnValue="Some" id="number" label="Number:" menu="" required="false" tooltip="If some, how many?"/>
+              </parameters>
+              <messages>
+                <message type="Create"/>
+                <message type="Update"/>
+                <message type="Complete"/>
+              </messages>
+              <dependents>
+                <task label="" type="Complete" value="">kinetic_request_submission_close_v1_13</task>
+              </dependents>
+            </task>
+            <task definition_id="kinetic_request_submission_close_v1" id="kinetic_request_submission_close_v1_13" name="Close" x="367.624996185303" y="546.267028808594">
+              <version>1</version>
+              <configured>true</configured>
+              <defers>false</defers>
+              <deferrable>false</deferrable>
+              <visible>false</visible>
+              <parameters>
+                <parameter id="validation_status" label="Validation Status:" menu="" required="true" tooltip="The value the Validation Status field on the specified Kinetic Request submission record will be set to.">Completed</parameter>
+                <parameter id="submission_id" label="Submission Id:" menu="" required="true" tooltip="The instance id of the Kinetic Request submission to be updated.">&lt;%=@base['CustomerSurveyInstanceId']%&gt;</parameter>
+              </parameters>
+              <messages>
+                <message type="Create"/>
+                <message type="Update"/>
+                <message type="Complete"/>
+              </messages>
+              <dependents/>
+            </task>
+          
+            <task name="Look for existing notification content record" id="kinetic_helper_record_find_v5_14" definition_id="kinetic_helper_record_find_v5" x="153" y="66">
+          <version>5</version>
+          <configured>true</configured>
+          <defers>false</defers>
+          <deferrable>false</deferrable>
+          <visible>false</visible>
+          <parameters>
+    		<parameter id="SurveyInstanceID" label="SurveyInstanceID" required="false" tooltip="SurveyInstanceID" menu=""/>
+    		<parameter id="CustomerSurveyInstanceID" label="CustomerSurveyInstanceID" required="false" tooltip="CustomerSurveyInstanceID" menu=""/>
+    		<parameter id="Status" label="Status" required="false" tooltip="Status of the helper record, Active or Inactive" menu=""/>
+    		<parameter id="Character Field1" label="Character Field1" required="false" tooltip="Character Field1" menu="">&lt;%=@answers['Language']%&gt;</parameter>
+    		<parameter id="Character Field2" label="Character Field2" required="false" tooltip="Character Field2" menu=""/>
+    		<parameter id="Character Field3" label="Character Field3" required="false" tooltip="Character Field3" menu=""/>
+    		<parameter id="Character Field4" label="Character Field4" required="false" tooltip="Character Field4" menu=""/>
+    		<parameter id="Character Field5" label="Character Field5" required="false" tooltip="Character Field5" menu=""/>
+    		<parameter id="Character Field6" label="Character Field6" required="false" tooltip="Character Field6" menu=""/>
+    		<parameter id="Character Field7" label="Character Field7" required="false" tooltip="Character Field7" menu=""/>
+    		<parameter id="Character Field8" label="Character Field8" required="false" tooltip="Character Field8" menu=""/>
+    		<parameter id="Character Field9" label="Character Field9" required="false" tooltip="Character Field9" menu=""/>
+    		<parameter id="Character Field10" label="Character Field10" required="false" tooltip="Character Field10" menu=""/>
+    		<parameter id="Character Field11" label="Character Field11" required="false" tooltip="Character Field11" menu=""/>
+    		<parameter id="Character Field12" label="Character Field12" required="false" tooltip="Character Field12" menu=""/>
+    		<parameter id="Integer Field1" label="Integer Field1" required="false" tooltip="Integer Field1" menu=""/>
+    		<parameter id="Integer Field2" label="Integer Field2" required="false" tooltip="Integer Field2" menu=""/>
+    		<parameter id="Integer Field3" label="Integer Field3" required="false" tooltip="Integer Field3" menu=""/>
+    		<parameter id="Integer Field4" label="Integer Field4" required="false" tooltip="Integer Field4" menu=""/>
+    		<parameter id="Integer Field5" label="Integer Field5" required="false" tooltip="Integer Field5" menu=""/>
+    		<parameter id="Integer Field6" label="Integer Field6" required="false" tooltip="Integer Field6" menu=""/>
+    		<parameter id="Index Field1" label="Index Field1" required="false" tooltip="Index Field1" menu="">Notification Content</parameter>
+    		<parameter id="Index Field2" label="Index Field2" required="false" tooltip="Index Field2" menu="">&lt;%=@answers['Notification Name']%&gt;</parameter>
+    		<parameter id="Index Field3" label="Index Field3" required="false" tooltip="Index Field3" menu="">&lt;%=@answers['Organization']%&gt;</parameter>
+        </parameters><messages>
+            <message type="Create"/>
+            <message type="Update"/>
+            <message type="Complete"/>
+          </messages>
+          <dependents><task type="Complete" label="Record found" value="!@results['Look for existing notification content record']['Entry Id'].nil? &amp;&amp; @results['Look for existing notification content record']['Entry Id']&gt;&quot;&quot;">kinetic_helper_record_update_v2_2</task><task type="Complete" label="No record found" value="@results['Look for existing notification content record']['Entry Id'].nil? || @results['Look for existing notification content record']['Entry Id']==&quot;&quot;">kinetic_helper_record_create_v3_16</task></dependents>
+        </task>
+          
+            <task name="Look for existing notification recipient record" id="kinetic_helper_record_find_v5_15" definition_id="kinetic_helper_record_find_v5" x="540" y="46">
+          <version>5</version>
+          <configured>true</configured>
+          <defers>false</defers>
+          <deferrable>false</deferrable>
+          <visible>false</visible>
+          <parameters>
+    		<parameter id="SurveyInstanceID" label="SurveyInstanceID" required="false" tooltip="SurveyInstanceID" menu=""/>
+    		<parameter id="CustomerSurveyInstanceID" label="CustomerSurveyInstanceID" required="false" tooltip="CustomerSurveyInstanceID" menu=""/>
+    		<parameter id="Status" label="Status" required="false" tooltip="Status of the helper record, Active or Inactive" menu=""/>
+    		<parameter id="Character Field1" label="Character Field1" required="false" tooltip="Character Field1" menu=""/>
+    		<parameter id="Character Field2" label="Character Field2" required="false" tooltip="Character Field2" menu="">&lt;%=@answers['Language']%&gt;</parameter>
+    		<parameter id="Character Field3" label="Character Field3" required="false" tooltip="Character Field3" menu=""/>
+    		<parameter id="Character Field4" label="Character Field4" required="false" tooltip="Character Field4" menu=""/>
+    		<parameter id="Character Field5" label="Character Field5" required="false" tooltip="Character Field5" menu=""/>
+    		<parameter id="Character Field6" label="Character Field6" required="false" tooltip="Character Field6" menu=""/>
+    		<parameter id="Character Field7" label="Character Field7" required="false" tooltip="Character Field7" menu=""/>
+    		<parameter id="Character Field8" label="Character Field8" required="false" tooltip="Character Field8" menu=""/>
+    		<parameter id="Character Field9" label="Character Field9" required="false" tooltip="Character Field9" menu=""/>
+    		<parameter id="Character Field10" label="Character Field10" required="false" tooltip="Character Field10" menu=""/>
+    		<parameter id="Character Field11" label="Character Field11" required="false" tooltip="Character Field11" menu=""/>
+    		<parameter id="Character Field12" label="Character Field12" required="false" tooltip="Character Field12" menu=""/>
+    		<parameter id="Integer Field1" label="Integer Field1" required="false" tooltip="Integer Field1" menu=""/>
+    		<parameter id="Integer Field2" label="Integer Field2" required="false" tooltip="Integer Field2" menu=""/>
+    		<parameter id="Integer Field3" label="Integer Field3" required="false" tooltip="Integer Field3" menu=""/>
+    		<parameter id="Integer Field4" label="Integer Field4" required="false" tooltip="Integer Field4" menu=""/>
+    		<parameter id="Integer Field5" label="Integer Field5" required="false" tooltip="Integer Field5" menu=""/>
+    		<parameter id="Integer Field6" label="Integer Field6" required="false" tooltip="Integer Field6" menu=""/>
+    		<parameter id="Index Field1" label="Index Field1" required="false" tooltip="Index Field1" menu="">Notification Content</parameter>
+    		<parameter id="Index Field2" label="Index Field2" required="false" tooltip="Index Field2" menu="">&lt;%=@answers['Notification Name']%&gt;</parameter>
+    		<parameter id="Index Field3" label="Index Field3" required="false" tooltip="Index Field3" menu="">&lt;%=@answers['Organization']%&gt;</parameter>
+        </parameters><messages>
+            <message type="Create"/>
+            <message type="Update"/>
+            <message type="Complete"/>
+          </messages>
+          <dependents><task type="Complete" label="Record found" value="!@results['Look for existing notification recipient record']['Entry Id'].nil? &amp;&amp; @results['Look for existing notification recipient record']['Entry Id']&gt;&quot;&quot;">kinetic_helper_record_update_v2_8</task><task type="Complete" label="No record found" value="@results['Look for existing notification recipient record']['Entry Id'].nil? || @results['Look for existing notification recipient record']['Entry Id']==&quot;&quot;">kinetic_helper_record_create_v3_17</task></dependents>
+        </task>
+          
+            <task name="Create content record" id="kinetic_helper_record_create_v3_16" definition_id="kinetic_helper_record_create_v3" x="281" y="224">
+          <version>3</version>
+          <configured>true</configured>
+          <defers>false</defers>
+          <deferrable>false</deferrable>
+          <visible>false</visible>
+          <parameters>
+    		<parameter id="SurveyInstanceID" label="SurveyInstanceID" required="false" tooltip="SurveyInstanceID" menu=""/>
+    		<parameter id="CustomerSurveyInstanceID" label="CustomerSurveyInstanceID" required="false" tooltip="CustomerSurveyInstanceID" menu=""/>
+    		<parameter id="Character Field1" label="Character Field1" required="false" tooltip="Character Field1" menu="">&lt;%=@answers['Language']%&gt;</parameter>
+    		<parameter id="Character Field2" label="Character Field2" required="false" tooltip="Character Field2" menu=""/>
+    		<parameter id="Character Field3" label="Character Field3" required="false" tooltip="Character Field3" menu=""/>
+    		<parameter id="Character Field4" label="Character Field4" required="false" tooltip="Character Field4" menu=""/>
+    		<parameter id="Character Field5" label="Character Field5" required="false" tooltip="Character Field5" menu=""/>
+    		<parameter id="Character Field6" label="Character Field6" required="false" tooltip="Character Field6" menu=""/>
+    		<parameter id="Character Field7" label="Character Field7" required="false" tooltip="Character Field7" menu=""/>
+    		<parameter id="Character Field8" label="Character Field8" required="false" tooltip="Character Field8" menu=""/>
+    		<parameter id="Character Field9" label="Character Field9" required="false" tooltip="Character Field9" menu=""/>
+    		<parameter id="Character Field10" label="Character Field10" required="false" tooltip="Character Field10" menu=""/>
+    		<parameter id="Character Field11" label="Character Field11" required="false" tooltip="Character Field11" menu=""/>
+    		<parameter id="Character Field12" label="Character Field12" required="false" tooltip="Character Field12" menu=""/>
+    		<parameter id="Character Field13" label="Character Field13" required="false" tooltip="Character Field13" menu="">&lt;%=@answers['Subject Line']%&gt;</parameter>
+    		<parameter id="Character Field14" label="Character Field14" required="false" tooltip="Character Field14" menu="">&lt;%=@answers['Message Body']%&gt;</parameter>
+    		<parameter id="Index Field1" label="Index Field1" required="false" tooltip="Index Field1" menu="">Notification Content</parameter>
+    		<parameter id="Index Field2" label="Index Field2" required="false" tooltip="Index Field2" menu="">&lt;%=@answers['Notification Name']%&gt;</parameter>
+    		<parameter id="Index Field3" label="Index Field3" required="false" tooltip="Index Field3" menu="">&lt;%=@answers['Organization']%&gt;</parameter>
+    		<parameter id="Integer Field1" label="Integer Field1" required="false" tooltip="Integer Field1" menu=""/>
+    		<parameter id="Integer Field2" label="Integer Field2" required="false" tooltip="Integer Field2" menu=""/>
+    		<parameter id="Integer Field3" label="Integer Field3" required="false" tooltip="Integer Field3" menu=""/>
+    		<parameter id="Integer Field4" label="Integer Field4" required="false" tooltip="Integer Field4" menu=""/>
+    		<parameter id="Integer Field5" label="Integer Field5" required="false" tooltip="Integer Field5" menu=""/>
+    		<parameter id="Integer Field6" label="Integer Field6" required="false" tooltip="Integer Field6" menu=""/>
+    		<parameter id="Date Field1" label="Date Field1" required="false" tooltip="Date Field1" menu=""/>
+    		<parameter id="Date Field2" label="Date Field2" required="false" tooltip="Date Field2" menu=""/>
+    		<parameter id="Date Field3" label="Date Field3" required="false" tooltip="Date Field3" menu=""/>
+    		<parameter id="Date Field4" label="Date Field4" required="false" tooltip="Date Field4" menu=""/>
+    		<parameter id="Date Field5" label="Date Field5" required="false" tooltip="Date Field5" menu=""/>
+    		<parameter id="Date Field6" label="Date Field6" required="false" tooltip="Date Field6" menu=""/>
+    		<parameter id="Date Field7" label="Date Field7" required="false" tooltip="Date Field7" menu=""/>
+    		<parameter id="Date/Time Field1" label="Date/Time Field1" required="false" tooltip="Date/Time Field1" menu=""/>
+    		<parameter id="Date/Time Field2" label="Date/Time Field2" required="false" tooltip="Date/Time Field2" menu=""/>
+    		<parameter id="Date/Time Field3" label="Date/Time Field3" required="false" tooltip="Date/Time Field3" menu=""/>
+    		<parameter id="Date/Time Field4" label="Date/Time Field4" required="false" tooltip="Date/Time Field4" menu=""/>
+    		<parameter id="Date/Time Field5" label="Date/Time Field5" required="false" tooltip="Date/Time Field5" menu=""/>
+    		<parameter id="Date/Time Field6" label="Date/Time Field6" required="false" tooltip="Date/Time Field6" menu=""/>
+    		<parameter id="Date/Time Field7" label="Date/Time Field7" required="false" tooltip="Date/Time Field7" menu=""/>
+    		<parameter id="Time Field1" label="Time Field1" required="false" tooltip="Time Field1" menu=""/>
+    		<parameter id="Time Field2" label="Time Field2" required="false" tooltip="Time Field2" menu=""/>
+    		<parameter id="Time Field3" label="Time Field3" required="false" tooltip="Time Field3" menu=""/>
+    		<parameter id="Time Field4" label="Time Field4" required="false" tooltip="Time Field4" menu=""/>
+    		<parameter id="Time Field5" label="Time Field5" required="false" tooltip="Time Field5" menu=""/>
+    		<parameter id="Time Field6" label="Time Field6" required="false" tooltip="Time Field6" menu=""/>
+    		<parameter id="Time Field7" label="Time Field7" required="false" tooltip="Time Field7" menu=""/>
+        </parameters><messages>
+            <message type="Create"/>
+            <message type="Update"/>
+            <message type="Complete"/>
+          </messages>
+          <dependents><task type="Complete" label="" value="">system_join_v1_10</task></dependents>
+        </task>
+          
+            <task name="Create recipient record" id="kinetic_helper_record_create_v3_17" definition_id="kinetic_helper_record_create_v3" x="654" y="172">
+          <version>3</version>
+          <configured>true</configured>
+          <defers>false</defers>
+          <deferrable>false</deferrable>
+          <visible>false</visible>
+          <parameters>
+    		<parameter id="SurveyInstanceID" label="SurveyInstanceID" required="false" tooltip="SurveyInstanceID" menu=""/>
+    		<parameter id="CustomerSurveyInstanceID" label="CustomerSurveyInstanceID" required="false" tooltip="CustomerSurveyInstanceID" menu=""/>
+    		<parameter id="Character Field1" label="Character Field1" required="false" tooltip="Character Field1" menu="">&lt;%=@answers['Recipient Type']%&gt;</parameter>
+    		<parameter id="Character Field2" label="Character Field2" required="false" tooltip="Character Field2" menu="">&lt;%=@answers['Language']%&gt;</parameter>
+    		<parameter id="Character Field3" label="Character Field3" required="false" tooltip="Character Field3" menu=""/>
+    		<parameter id="Character Field4" label="Character Field4" required="false" tooltip="Character Field4" menu=""/>
+    		<parameter id="Character Field5" label="Character Field5" required="false" tooltip="Character Field5" menu=""/>
+    		<parameter id="Character Field6" label="Character Field6" required="false" tooltip="Character Field6" menu=""/>
+    		<parameter id="Character Field7" label="Character Field7" required="false" tooltip="Character Field7" menu=""/>
+    		<parameter id="Character Field8" label="Character Field8" required="false" tooltip="Character Field8" menu=""/>
+    		<parameter id="Character Field9" label="Character Field9" required="false" tooltip="Character Field9" menu=""/>
+    		<parameter id="Character Field10" label="Character Field10" required="false" tooltip="Character Field10" menu=""/>
+    		<parameter id="Character Field11" label="Character Field11" required="false" tooltip="Character Field11" menu=""/>
+    		<parameter id="Character Field12" label="Character Field12" required="false" tooltip="Character Field12" menu=""/>
+    		<parameter id="Character Field13" label="Character Field13" required="false" tooltip="Character Field13" menu="">&lt;%=@answers['Recipient Value']%&gt;</parameter>
+    		<parameter id="Character Field14" label="Character Field14" required="false" tooltip="Character Field14" menu=""/>
+    		<parameter id="Index Field1" label="Index Field1" required="false" tooltip="Index Field1" menu="">Notification Recipient</parameter>
+    		<parameter id="Index Field2" label="Index Field2" required="false" tooltip="Index Field2" menu="">&lt;%=@answers['Notification Name']%&gt;</parameter>
+    		<parameter id="Index Field3" label="Index Field3" required="false" tooltip="Index Field3" menu="">&lt;%=@answers['Organization']%&gt;</parameter>
+    		<parameter id="Integer Field1" label="Integer Field1" required="false" tooltip="Integer Field1" menu=""/>
+    		<parameter id="Integer Field2" label="Integer Field2" required="false" tooltip="Integer Field2" menu=""/>
+    		<parameter id="Integer Field3" label="Integer Field3" required="false" tooltip="Integer Field3" menu=""/>
+    		<parameter id="Integer Field4" label="Integer Field4" required="false" tooltip="Integer Field4" menu=""/>
+    		<parameter id="Integer Field5" label="Integer Field5" required="false" tooltip="Integer Field5" menu=""/>
+    		<parameter id="Integer Field6" label="Integer Field6" required="false" tooltip="Integer Field6" menu=""/>
+    		<parameter id="Date Field1" label="Date Field1" required="false" tooltip="Date Field1" menu=""/>
+    		<parameter id="Date Field2" label="Date Field2" required="false" tooltip="Date Field2" menu=""/>
+    		<parameter id="Date Field3" label="Date Field3" required="false" tooltip="Date Field3" menu=""/>
+    		<parameter id="Date Field4" label="Date Field4" required="false" tooltip="Date Field4" menu=""/>
+    		<parameter id="Date Field5" label="Date Field5" required="false" tooltip="Date Field5" menu=""/>
+    		<parameter id="Date Field6" label="Date Field6" required="false" tooltip="Date Field6" menu=""/>
+    		<parameter id="Date Field7" label="Date Field7" required="false" tooltip="Date Field7" menu=""/>
+    		<parameter id="Date/Time Field1" label="Date/Time Field1" required="false" tooltip="Date/Time Field1" menu=""/>
+    		<parameter id="Date/Time Field2" label="Date/Time Field2" required="false" tooltip="Date/Time Field2" menu=""/>
+    		<parameter id="Date/Time Field3" label="Date/Time Field3" required="false" tooltip="Date/Time Field3" menu=""/>
+    		<parameter id="Date/Time Field4" label="Date/Time Field4" required="false" tooltip="Date/Time Field4" menu=""/>
+    		<parameter id="Date/Time Field5" label="Date/Time Field5" required="false" tooltip="Date/Time Field5" menu=""/>
+    		<parameter id="Date/Time Field6" label="Date/Time Field6" required="false" tooltip="Date/Time Field6" menu=""/>
+    		<parameter id="Date/Time Field7" label="Date/Time Field7" required="false" tooltip="Date/Time Field7" menu=""/>
+    		<parameter id="Time Field1" label="Time Field1" required="false" tooltip="Time Field1" menu=""/>
+    		<parameter id="Time Field2" label="Time Field2" required="false" tooltip="Time Field2" menu=""/>
+    		<parameter id="Time Field3" label="Time Field3" required="false" tooltip="Time Field3" menu=""/>
+    		<parameter id="Time Field4" label="Time Field4" required="false" tooltip="Time Field4" menu=""/>
+    		<parameter id="Time Field5" label="Time Field5" required="false" tooltip="Time Field5" menu=""/>
+    		<parameter id="Time Field6" label="Time Field6" required="false" tooltip="Time Field6" menu=""/>
+    		<parameter id="Time Field7" label="Time Field7" required="false" tooltip="Time Field7" menu=""/>
+        </parameters><messages>
+            <message type="Create"/>
+            <message type="Update"/>
+            <message type="Complete"/>
+          </messages>
+          <dependents><task type="Complete" label="" value="">system_join_v1_9</task></dependents>
+        </task>
+          </request>
+        </taskTree>
+</tree>
