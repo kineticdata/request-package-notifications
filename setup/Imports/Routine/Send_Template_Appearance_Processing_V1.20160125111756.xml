@@ -1,0 +1,231 @@
+<tree schema_version="1.0">
+    <sourceName>-</sourceName>
+    <sourceGroup>-</sourceGroup>
+    <definitionId>routine_send_template_appearance_proc_v1</definitionId>
+    <type>Global Routine</type>
+    <status>Active</status>
+    <taskTree schema_version="1.0" version="" builder_version="">
+        <name>Send Template Appearance Processing V1</name>
+        <author/>
+        <notes/>
+        <lastID>12</lastID>
+        <taskDefinition id="routine_send_template_appearance_proc_v1" name="Send Template Appearance Processing V1" schema_version="1.0" version="1">
+            <visible>false</visible>
+            <deferrable>true</deferrable>
+            <parameters>
+                <parameter id="MessageSubject" label="MessageSubject" required="true" tooltip="Subject of Message to be Processed"/>
+                <parameter id="MessageBody" label="MessageBody" required="true" tooltip="Body of Message to be Processed"/>
+            </parameters>
+            <handler name="system_tree_call" version="1"/>
+            <results format="xml">
+                <result name="MessageSubject" tooltip="Processed Message Subject"/>
+                <result name="MessageBody" tooltip="Processed Message Body"/>
+            </results>
+        </taskDefinition>
+        <request>
+            <task definition_id="system_start_v1" id="start" name="Start" x="10" y="10">
+                <version>1</version>
+                <configured>true</configured>
+                <defers>false</defers>
+                <deferrable>false</deferrable>
+                <visible>false</visible>
+                <parameters/>
+                <messages/>
+                <dependents><task type="Complete" label="" value="">helper_form_notification_format_lookup_v1_1</task></dependents>
+            </task>
+        
+            <task name="Lookup Date Formats" id="helper_form_notification_format_lookup_v1_1" definition_id="helper_form_notification_format_lookup_v1" x="139.3000030517578" y="80.41667175292969">
+          <version>1</version>
+          <configured>true</configured>
+          <defers>false</defers>
+          <deferrable>false</deferrable>
+          <visible>false</visible>
+          <parameters>
+            <parameter id="formatType" label="Format Type:" required="true" tooltip="The Format Type, ex Dates" menu="">Dates</parameter>
+        </parameters><messages>
+            <message type="Create"/>
+            <message type="Update"/>
+            <message type="Complete"/>
+          </messages>
+          <dependents><task type="Complete" label="" value="">utilities_echo_v1_5</task></dependents>
+        </task>
+          
+            
+          
+            
+          
+            
+          
+            <task name="Process Subject - Dates" id="utilities_echo_v1_5" definition_id="utilities_echo_v1" x="212" y="205">
+          <version>1</version>
+          <configured>true</configured>
+          <defers>false</defers>
+          <deferrable>false</deferrable>
+          <visible>false</visible>
+          <parameters>
+            <parameter id="input" label="Input" required="true" tooltip="" menu="">&lt;%= content="" 
+    content=@inputs['MessageSubject'].gsub(/&lt;APPEARANCE&gt;(.*?)&lt;\/APPEARANCE&gt;/) do
+    #need to split into content and &lt;FORMAT&gt; tag
+    #check if tag matches a valid date and if so convert first part into date and format it.
+    thisContent=$1.split("&lt;FORMAT&gt;")
+    thisDateFormat=thisContent[1].gsub(/(.*?)&lt;\/FORMAT&gt;/) do
+    if @results['Lookup Date Formats'].has_key?($1)
+    @results['Lookup Date Formats'][$1]
+    else
+    '&lt;FORMAT&gt;'+$1+'&lt;/FORMAT&gt;'
+    end
+    end
+    if !thisDateFormat.nil? &amp;&amp; !thisDateFormat.include?('&lt;FORMAT&gt;')
+    if thisDateFormat.include?('%')
+    #turn original content into date and format it
+    d = Date.parse(thisContent[0])
+    d.strftime(thisDateFormat)
+    end
+    else
+    '&lt;APPEARANCE&gt;'+thisContent[0]+thisDateFormat+'&lt;/APPEARANCE&gt;'
+    end
+    end
+    content %&gt;</parameter>
+        </parameters><messages>
+            <message type="Create"/>
+            <message type="Update"/>
+            <message type="Complete"/>
+          </messages>
+          <dependents><task type="Complete" label="" value="">utilities_echo_v1_9</task></dependents>
+        </task>
+          
+            
+          
+            
+          
+            <task name="return" id="system_tree_return_v1_8" definition_id="system_tree_return_v1" x="205" y="743">
+          <version>1</version>
+          <configured>true</configured>
+          <defers>false</defers>
+          <deferrable>false</deferrable>
+          <visible>false</visible>
+          <parameters>
+            <parameter id="MessageSubject" label="MessageSubject" required="false" tooltip="Processed Message Subject" menu="">&lt;%=@results['Process Subject - Dates']['output']%&gt;</parameter>
+            <parameter id="MessageBody" label="MessageBody" required="false" tooltip="Processed Message Body" menu="">&lt;%=@results['Process Body- Dates']['output']%&gt;</parameter>
+        </parameters><messages>
+            <message type="Create"/>
+            <message type="Update"/>
+            <message type="Complete"/>
+          </messages>
+          <dependents/>
+        </task>
+          
+            <task name="Process Body- Dates" id="utilities_echo_v1_9" definition_id="utilities_echo_v1" x="210" y="330">
+          <version>1</version>
+          <configured>true</configured>
+          <defers>false</defers>
+          <deferrable>false</deferrable>
+          <visible>false</visible>
+          <parameters>
+            <parameter id="input" label="Input" required="true" tooltip="" menu="">&lt;%= content="" 
+    content=@inputs['MessageBody'].gsub(/&lt;APPEARANCE&gt;(.*?)&lt;\/APPEARANCE&gt;/) do
+    #need to split into content and &lt;FORMAT&gt; tag
+    #check if tag matches a valid date and if so convert first part into date and format it.
+    thisContent=$1.split("&lt;FORMAT&gt;")
+    thisDateFormat=thisContent[1].gsub(/(.*?)&lt;\/FORMAT&gt;/) do
+    if @results['Lookup Date Formats'].has_key?($1)
+    @results['Lookup Date Formats'][$1]
+    else
+    '&lt;FORMAT&gt;'+$1+'&lt;/FORMAT&gt;'
+    end
+    end
+    if !thisDateFormat.nil? &amp;&amp; !thisDateFormat.include?('&lt;FORMAT&gt;')
+    if thisDateFormat.include?('%')
+    #turn original content into date and format it
+    d = Date.parse(thisContent[0])
+    d.strftime(thisDateFormat)
+    end
+    else
+    thisvalue = '&lt;APPEARANCE&gt;'+thisContent[0]+thisDateFormat+'&lt;/APPEARANCE&gt;'
+    end
+    end
+    content %&gt;</parameter>
+        </parameters><messages>
+            <message type="Create"/>
+            <message type="Update"/>
+            <message type="Complete"/>
+          </messages>
+          <dependents><task type="Complete" label="" value="">utilities_echo_v1_10</task></dependents>
+        </task>
+          
+            <task name="Process Subject - Clean Up" id="utilities_echo_v1_10" definition_id="utilities_echo_v1" x="218" y="466">
+          <version>1</version>
+          <configured>true</configured>
+          <defers>false</defers>
+          <deferrable>false</deferrable>
+          <visible>false</visible>
+          <parameters>
+            <parameter id="input" label="Input" required="true" tooltip="" menu="">&lt;%= content="" 
+    content=@results['Process Subject - Dates']['output'].gsub(/&lt;APPEARANCE&gt;(.*?)&lt;\/APPEARANCE&gt;/) do
+    #need to split into content and &lt;FORMAT&gt; tag
+    #check if tag matches a valid date and if so convert first part into date and format it.
+    thisContent=$1.split("&lt;FORMAT&gt;")
+    thisDateFormat=thisContent[1].gsub(/(.*?)&lt;\/FORMAT&gt;/) do
+    ""
+    end
+    thisContent[0]
+    end
+    content %&gt;</parameter>
+        </parameters><messages>
+            <message type="Create"/>
+            <message type="Update"/>
+            <message type="Complete"/>
+          </messages>
+          <dependents><task type="Complete" label="" value="">utilities_echo_v1_11</task></dependents>
+        </task>
+          
+            <task name="Process Body - Clean Up" id="utilities_echo_v1_11" definition_id="utilities_echo_v1" x="219" y="585">
+          <version>1</version>
+          <configured>true</configured>
+          <defers>false</defers>
+          <deferrable>false</deferrable>
+          <visible>false</visible>
+          <parameters>
+            <parameter id="input" label="Input" required="true" tooltip="" menu="">&lt;%= content="" 
+    content=@results['Process Body- Dates']['output'].gsub(/&lt;APPEARANCE&gt;(.*?)&lt;\/APPEARANCE&gt;/) do
+    #need to split into content and &lt;FORMAT&gt; tag
+    #check if tag matches a valid date and if so convert first part into date and format it.
+    thisContent=$1.split("&lt;FORMAT&gt;")
+    thisDateFormat=thisContent[1].gsub(/(.*?)&lt;\/FORMAT&gt;/) do
+    ""
+    end
+    thisContent[0]
+    end
+    content %&gt;</parameter>
+        </parameters><messages>
+            <message type="Create"/>
+            <message type="Update"/>
+            <message type="Complete"/>
+          </messages>
+          <dependents><task type="Complete" label="" value="">utilities_create_trigger_v1_12</task></dependents>
+        </task>
+          
+            <task name="manual return" id="utilities_create_trigger_v1_12" definition_id="utilities_create_trigger_v1" x="381.29998779296875" y="723">
+          <version>1</version>
+          <configured>true</configured>
+          <defers>false</defers>
+          <deferrable>false</deferrable>
+          <visible>false</visible>
+          <parameters>
+            <parameter id="action_type" label="Action Type" menu="Update,Complete" required="true" tooltip="">Complete</parameter>
+            <parameter id="deferral_token" label="Deferral Token" required="true" tooltip="" menu="">&lt;%=@run['Token']%&gt;</parameter>
+            <parameter id="deferred_variables" label="Deferred Results" required="false" tooltip="" menu="">&lt;results&gt;
+      &lt;result name="MessageSubject"&gt;&lt;%= KineticTask::Utils.xml_encode(@results['Process Subject - Clean Up']['output']) %&gt;&lt;/result&gt;
+      &lt;result name="MessageBody"&gt;&lt;%= KineticTask::Utils.xml_encode(@results['Process Body - Clean Up']['output']) %&gt;&lt;/result&gt;
+    &lt;/results&gt;</parameter>
+            <parameter id="message" label="Message" required="false" tooltip="" menu=""/>
+        </parameters><messages>
+            <message type="Create"/>
+            <message type="Update"/>
+            <message type="Complete"/>
+          </messages>
+          <dependents/>
+        </task>
+          </request>
+    </taskTree>
+</tree>

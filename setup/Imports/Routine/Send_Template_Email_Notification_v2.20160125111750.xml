@@ -1,31 +1,31 @@
 <tree schema_version="1.0">
     <sourceName>-</sourceName>
     <sourceGroup>-</sourceGroup>
-    <definitionId>routine_send_template_email_v1</definitionId>
+    <definitionId>routine_send_template_email_v2</definitionId>
     <type>Global Routine</type>
     <status>Active</status>
-    <taskTree builder_version="4.0.1" schema_version="1.0" version="">
-          <name>Send Template Email Notification v1</name>
+    <taskTree builder_version="" schema_version="1.0" version="">
+          <name>Send Template Email Notification v2</name>
           <author/>
           <notes/>
-          <lastID>58</lastID>
-          <taskDefinition id="routine_send_template_email_v1" name="Send Template Email Notification v1" schema_version="1.0" version="1">
+          <lastID>73</lastID>
+          <taskDefinition id="routine_send_template_email_v2" name="Send Template Email Notification v2" schema_version="1.0" version="1">
             <visible>false</visible>
             <deferrable>true</deferrable>
             <parameters>
-              <parameter id="Email Addresses To Email" label="Email Addresses To Email" required="false" tooltip="List of comma delimited email addresses to email"/>
-              <parameter id="Login IDs To Email" label="Login IDs To Email" required="false" tooltip="List of comma delimited login ids to email (email addresses looked up in CTM:People)"/>
-              <parameter id="Email Template Name" label="Email Template Name" required="true" tooltip=""/>
-              <parameter id="Format Answers" label="Format Answers" required="false" tooltip=""/>
-              <parameter id="JSON Misc." label="JSON Misc." required="false" tooltip="JSON input of miscellaneous values"/>
-              <parameter id="Request Instance ID" label="Request Instance ID" required="false" tooltip="instanceId of the Kinetic Request submission to get answers/dataset for"/>
-              <parameter id="Region" label="Region" required="false" tooltip="Region to send the message to/for, recommended if using predefined recipients"/>
-              <parameter id="Language" label="Language" required="false" tooltip="Language to send the message in, recommended if using predefined recipients"/>
-              <parameter id="Catalog" label="Catalog" required="true" tooltip=""/>
+                <parameter id="Email Addresses To Email" label="Email Addresses To Email" required="false" tooltip="List of comma delimited email addresses to email"/>
+                <parameter id="Login IDs To Email" label="Login IDs To Email" required="false" tooltip="List of comma delimited login ids to email (email addresses looked up in CTM:People)"/>
+                <parameter id="Email Template Name" label="Email Template Name" required="true" tooltip=""/>
+                <parameter id="Format Answers" label="Format Answers" required="false" tooltip=""/>
+                <parameter id="JSON Misc." label="JSON Misc." required="false" tooltip="JSON input of miscellaneous values"/>
+                <parameter id="Request Instance ID" label="Request Instance ID" required="false" tooltip="instanceId of the Kinetic Request submission to get answers/dataset for"/>
+                <parameter id="Region" label="Region" required="false" tooltip="Region to send the message to/for, recommended if using predefined recipients"/>
+                <parameter id="Language" label="Language" required="false" tooltip="Language to send the message in, recommended if using predefined recipients"/>
+                <parameter id="Catalog" label="Catalog" required="true" tooltip=""/>
             </parameters>
             <handler name="system_tree_call" version="1"/>
             <results format="xml"/>
-          </taskDefinition>
+        </taskDefinition>
           <request>
             <task definition_id="system_start_v1" id="start" name="Start" x="-13" y="604">
               <version>1</version>
@@ -39,8 +39,9 @@
                 <task label="" type="Complete" value="">utility_json_to_results_v2_13</task>
                 <task label="Request Id not nil" type="Complete" value=" !@inputs['Request Instance ID'].nil? &amp;&amp; @inputs['Request Instance ID'].length &gt; 0 ">kinetic_request_submission_base_retrieve_v1_26</task>
                 <task label="Request Id Not Nil" type="Complete" value=" !@inputs['Request Instance ID'].nil? &amp;&amp; @inputs['Request Instance ID'].length &gt; 0 ">kinetic_request_answers_all_retrieve_v1_27</task>
-                <task label="Request Id not nil" type="Complete" value=" !@inputs['Request Instance ID'].nil? &amp;&amp; @inputs['Request Instance ID'].length &gt; 0 ">kinetic_request_submission_dataset_retrieve_v1_28</task>
-              </dependents>
+                
+              <task label="Request Id not nil" type="Complete" value=" !@inputs['Request Instance ID'].nil? &amp;&amp; @inputs['Request Instance ID'].length &gt; 0 ">kinetic_request_submission_dataset_retrieve_v2_59</task>
+                </dependents>
             </task>
             <task definition_id="system_tree_return_v1" id="system_tree_return_v1_3" name="Tree Return" x="2533" y="679.703125">
               <version>1</version>
@@ -121,10 +122,11 @@
               <deferrable>false</deferrable>
               <visible>false</visible>
               <parameters>
-                <parameter id="json" label="JSON String" menu="" required="true" tooltip="The json string to be converted.">
-                  &lt;%= if @inputs.has_key?('JSON Misc.') &amp;&amp; !@inputs['JSON
-                  Misc.'].nil? &amp;&amp; @inputs['JSON Misc.'].length &gt; 0 then
-                  @inputs['JSON Misc.'] else '{}' end %&gt; 
+                <parameter id="json" label="JSON String" menu="" required="true" tooltip="The json string to be converted.">&lt;%= if @inputs.has_key?('JSON Misc.') &amp;&amp; !@inputs['JSON Misc.'].nil? &amp;&amp; @inputs['JSON Misc.'].length &gt; 0 then
+    @inputs['JSON Misc.'] 
+    else 
+    '{}' 
+    end %&gt; 
                 </parameter>
               </parameters>
               <messages>
@@ -133,8 +135,9 @@
                 <message type="Complete"/>
               </messages>
               <dependents>
-                <task label="" type="Complete" value="">kinetic_request_service_item_attribute_retrieve_v1_36</task>
-              </dependents>
+                
+              <task label="" type="Complete" value="">kinetic_submission_retrieve_attribute_v1_60</task>
+                </dependents>
             </task>
             <task definition_id="utility_csv_to_xml_v1" id="utility_csv_to_xml_v1_14" name="Login ID List to XML" x="1606.6875" y="359.078125">
               <version>1</version>
@@ -175,7 +178,7 @@
                 <task label="" type="Complete" value="">bmc_itsm7_person_retrieve_v1_20</task>
               </dependents>
             </task>
-            <task definition_id="system_loop_tail_v1" id="system_loop_tail_v1_16" name="Login ID Loop End" x="2227.6875" y="353.703125">
+            <task definition_id="system_loop_tail_v1" id="system_loop_tail_v1_16" name="Login ID Loop End" x="2561" y="437">
               <version>1</version>
               <configured>true</configured>
               <defers>false</defers>
@@ -194,7 +197,7 @@
                 <task label="" type="Complete" value="">system_junction_v1_55</task>
               </dependents>
             </task>
-            <task definition_id="bmc_itsm7_person_retrieve_v1" id="bmc_itsm7_person_retrieve_v1_20" name="Retrieve Person Details" x="1757.6875" y="242.5">
+            <task definition_id="bmc_itsm7_person_retrieve_v1" id="bmc_itsm7_person_retrieve_v1_20" name="Retrieve Person Details" x="1770" y="242">
               <version>1</version>
               <configured>true</configured>
               <defers>false</defers>
@@ -209,8 +212,8 @@
                 <message type="Complete"/>
               </messages>
               <dependents>
-                <task label="" type="Complete" value="">helper_form_language_preference_lookup_v1_58</task>
-              </dependents>
+                
+              <task type="Complete" label="" value="">utilities_echo_v1_73</task></dependents>
             </task>
             <task definition_id="kinetic_request_submission_base_retrieve_v1" id="kinetic_request_submission_base_retrieve_v1_26" name="Base" x="204.6875" y="576.1875">
               <version>1</version>
@@ -248,69 +251,19 @@
                 <task label="" type="Complete" value="">system_junction_v1_31</task>
               </dependents>
             </task>
-            <task definition_id="kinetic_request_submission_dataset_retrieve_v1" id="kinetic_request_submission_dataset_retrieve_v1_28" name="Dataset" x="214.6875" y="643.78125">
-              <version>1</version>
-              <configured>true</configured>
-              <defers>false</defers>
-              <deferrable>false</deferrable>
-              <visible>false</visible>
-              <parameters>
-                <parameter id="Submission ID" label="Submission ID" menu="" required="true" tooltip="CustomerSurveyInstanceId or CustomerSurveyID on KS_CustomerSurvey">&lt;%=@inputs['Request Instance ID']%&gt;</parameter>
-              </parameters>
-              <messages>
-                <message type="Create"/>
-                <message type="Update"/>
-                <message type="Complete"/>
-              </messages>
-              <dependents>
-                <task label="" type="Complete" value="">system_junction_v1_31</task>
-              </dependents>
-            </task>
-            <task definition_id="smtp_email_send_v1" id="smtp_email_send_v1_29" name="Send Email - Addresses" x="1252.6875" y="204.09375">
+            
+            <task definition_id="smtp_email_send_v1" id="smtp_email_send_v1_29" name="Send Email - Addresses" x="1358" y="208">
               <version>1</version>
               <configured>true</configured>
               <defers>false</defers>
               <deferrable>false</deferrable>
               <visible>true</visible>
               <parameters>
-                <parameter id="from" label="From (email address)" menu="" required="true" tooltip="The email address of the simulated sender.">from@yourdomain.com</parameter>
+                <parameter id="from" label="From (email address)" menu="" required="true" tooltip="The email address of the simulated sender.">donotreplylaunch@transamerica.com</parameter>
                 <parameter id="to" label="To (email address)" menu="" required="true" tooltip="The email address of the intended recipient.">&lt;%=@results['Email Address Loop Start']['Value']%&gt;</parameter>
-                <parameter id="subject" label="Subject" menu="" required="false" tooltip="The subject of the email.">
-                  &lt;%= content="" content=@results['Get Notification Content -
-                  Email']['Subject'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
-                  @results['Dataset'][$1] end
-                  content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
-                  "" end content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
-                  @results['Answers'][$1] end
-                  content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
-                  @results['Base'][$1] end
-                  content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
-                  @results['Misc. Inputs'][$1] end content %&gt;
-                </parameter>
-                <parameter id="htmlbody" label="HTML Body" menu="" required="false" tooltip="HTML representing the body of a rich email.">
-                  &lt;%= content="" content=@results['Get Notification Content -
-                  Email']['Body'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
-                  @results['Dataset'][$1] end
-                  content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
-                  "" end content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
-                  @results['Answers'][$1] end
-                  content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
-                  @results['Base'][$1] end
-                  content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
-                  @results['Misc. Inputs'][$1] end content %&gt;
-                </parameter>
-                <parameter id="textbody" label="Alternate (text) Body" menu="" required="false" tooltip="A plaintext message that will be displayed if the recipient can't display multipart HTML emails.">
-                  &lt;%= content="" content=@results['Get Notification Content -
-                  Email']['Body'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
-                  @results['Dataset'][$1] end
-                  content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
-                  "" end content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
-                  @results['Answers'][$1] end
-                  content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
-                  @results['Base'][$1] end
-                  content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
-                  @results['Misc. Inputs'][$1] end content %&gt;
-                </parameter>
+                <parameter id="subject" label="Subject" menu="" required="false" tooltip="The subject of the email.">&lt;%=@results['Process Appearance - Email']['MessageSubject']%&gt;</parameter>
+                <parameter id="htmlbody" label="HTML Body" menu="" required="false" tooltip="HTML representing the body of a rich email.">&lt;%=@results['Process Appearance - Email']['MessageBody']%&gt;</parameter>
+                <parameter id="textbody" label="Alternate (text) Body" menu="" required="false" tooltip="A plaintext message that will be displayed if the recipient can't display multipart HTML emails.">&lt;%=@results['Process Appearance - Email']['MessageBody']%&gt;</parameter>
               </parameters>
               <messages>
                 <message type="Create"/>
@@ -321,52 +274,18 @@
                 <task label="" type="Complete" value="">system_join_v1_49</task>
               </dependents>
             </task>
-            <task definition_id="smtp_email_send_v1" id="smtp_email_send_v1_30" name="Send Email - IDs" x="1995" y="186">
+            <task definition_id="smtp_email_send_v1" id="smtp_email_send_v1_30" name="Send Email - IDs" x="2401" y="152">
               <version>1</version>
               <configured>true</configured>
               <defers>false</defers>
               <deferrable>false</deferrable>
               <visible>true</visible>
               <parameters>
-                <parameter id="from" label="From (email address)" menu="" required="true" tooltip="The email address of the simulated sender.">from@yourdomain.com</parameter>
+                <parameter id="from" label="From (email address)" menu="" required="true" tooltip="The email address of the simulated sender.">donotreplylaunch@transamerica.com</parameter>
                 <parameter id="to" label="To (email address)" menu="" required="true" tooltip="The email address of the intended recipient.">&lt;%=@results['Retrieve Person Details']['Email']%&gt;</parameter>
-                <parameter id="subject" label="Subject" menu="" required="false" tooltip="The subject of the email.">
-                  &lt;%= content="" content=@results['Get Notification Content - Login
-                  ID']['Subject'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
-                  @results['Dataset'][$1] end content=content.gsub(/&lt;PERSON
-                  DETAILS&gt;(.*?)&lt;\/PERSON DETAILS&gt;/) do @results['Retrieve
-                  Person Details'][$1] end
-                  content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
-                  @results['Answers'][$1] end
-                  content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
-                  @results['Base'][$1] end
-                  content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
-                  @results['Misc. Inputs'][$1] end content %&gt;
-                </parameter>
-                <parameter id="htmlbody" label="HTML Body" menu="" required="false" tooltip="HTML representing the body of a rich email.">
-                  &lt;%= content="" content=@results['Get Notification Content - Login
-                  ID']['Body'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
-                  @results['Dataset'][$1] end content=content.gsub(/&lt;PERSON
-                  DETAILS&gt;(.*?)&lt;\/PERSON DETAILS&gt;/) do @results['Retrieve
-                  Person Details'][$1] end
-                  content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
-                  @results['Answers'][$1] end
-                  content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
-                  @results['Base'][$1] end
-                  content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
-                  @results['Misc. Inputs'][$1] end content %&gt; 
-                </parameter>
-                <parameter id="textbody" label="Alternate (text) Body" menu="" required="false" tooltip="A plaintext message that will be displayed if the recipient can't display multipart HTML emails.">
-                  &lt;%= content="" content=@results['Get Notification Content - Login
-                  ID']['Body'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
-                  @results['Dataset'][$1] end
-                  content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
-                  @results['Answers'][$1] end
-                  content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
-                  @results['Base'][$1] end
-                  content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
-                  @results['Misc. Inputs'][$1] end content %&gt;
-                </parameter>
+                <parameter id="subject" label="Subject" menu="" required="false" tooltip="The subject of the email.">&lt;%=@results['Process Appearance - IDs']['MessageSubject']%&gt;</parameter>
+                <parameter id="htmlbody" label="HTML Body" menu="" required="false" tooltip="HTML representing the body of a rich email.">&lt;%=@results['Process Appearance - IDs']['MessageBody']%&gt;</parameter>
+                <parameter id="textbody" label="Alternate (text) Body" menu="" required="false" tooltip="A plaintext message that will be displayed if the recipient can't display multipart HTML emails.">&lt;%=@results['Process Appearance - IDs']['MessageBody']%&gt;</parameter>
               </parameters>
               <messages>
                 <message type="Create"/>
@@ -394,7 +313,7 @@
                 <task label="" type="Complete" value="">utility_csv_to_xml_v1_9</task>
               </dependents>
             </task>
-            <task definition_id="kinetic_request_attachment_retrieve_v2" id="kinetic_request_attachment_retrieve_v2_33" name="Attachment" x="1430.6875" y="632.359375">
+            <task definition_id="kinetic_request_attachment_retrieve_v2" id="kinetic_request_attachment_retrieve_v2_33" name="Attachment" x="1260" y="617">
               <version>2</version>
               <configured>true</configured>
               <defers>false</defers>
@@ -412,17 +331,17 @@
                 <message type="Complete"/>
               </messages>
               <dependents>
-                <task label="Predefined" type="Complete" value="!@results['Get Base Notification']['Recipient'].nil?">smtp_email_with_attachment_send_v1_37</task>
-              </dependents>
+                
+              <task type="Complete" label="Predefined" value="!@results['Get Base Notification']['Recipient'].nil?">routine_send_template_appearance_proc_v1_72</task></dependents>
             </task>
-            <task definition_id="helper_form_notification_content_lookup_v1" id="helper_form_notification_content_lookup_v1_34" name="Get Base Notification" x="610.6875" y="646.859375">
+            <task definition_id="helper_form_notification_content_lookup_v1" id="helper_form_notification_content_lookup_v1_34" name="Get Base Notification" x="666" y="529">
               <version>1</version>
               <configured>true</configured>
               <defers>false</defers>
               <deferrable>false</deferrable>
               <visible>false</visible>
               <parameters>
-                <parameter id="messagename" label="Message Name:" menu="" required="true" tooltip="The name of the message to be sent.  This is used to lookup the appropriate content in the KS_SRV_Helper form">&lt;%=@inputs['Request Instance ID']%&gt;</parameter>
+                <parameter id="messagename" label="Message Name:" menu="" required="true" tooltip="The name of the message to be sent.  This is used to lookup the appropriate content in the KS_SRV_Helper form">&lt;%=@inputs['Email Template Name']%&gt;</parameter>
                 <parameter id="region" label="Region:" menu="" required="false" tooltip="The region (if available) of the person that the email is to be sent to">&lt;%=@inputs['Region']%&gt;</parameter>
                 <parameter id="language" label="Language:" menu="" required="false" tooltip="The language (if available) that the message should be sent in">&lt;%=@inputs['Language']%&gt;</parameter>
               </parameters>
@@ -466,7 +385,7 @@
                 <task label="" type="Complete" value="">kinetic_request_attachment_retrieve_v2_33</task>
               </dependents>
             </task>
-            <task definition_id="kinetic_request_service_item_attribute_retrieve_v1" id="kinetic_request_service_item_attribute_retrieve_v1_36" name="Get Template ID" x="330" y="704">
+            <task definition_id="kinetic_request_service_item_attribute_retrieve_v1" id="kinetic_request_service_item_attribute_retrieve_v1_36" name="Get Template ID_old" x="-32" y="836">
               <version>1</version>
               <configured>true</configured>
               <defers>false</defers>
@@ -483,36 +402,27 @@
                 <message type="Complete"/>
               </messages>
               <dependents>
-                <task label="" type="Complete" value="">system_junction_v1_31</task>
               </dependents>
             </task>
-            <task definition_id="smtp_email_with_attachment_send_v1" id="smtp_email_with_attachment_send_v1_37" name="Send Email - Predefined Recipients - Attachment" x="1675" y="614.640625">
+            <task definition_id="smtp_email_with_attachment_send_v1" id="smtp_email_with_attachment_send_v1_37" name="Send Email - Predefined Recipients - Attachment" x="1692" y="556">
               <version>1</version>
               <configured>true</configured>
               <defers>false</defers>
               <deferrable>false</deferrable>
               <visible>false</visible>
               <parameters>
-                <parameter id="to" label="To" menu="" required="true" tooltip="A comma separated list of email address to be used as the intended recipients.  Custom names can be used if any of the addresses are provided in the format: NAME &lt;ADDRESS&gt;">
-                  &lt;%=if @results.has_key?('Collect Emails') @results['Collect
-                  Emails']['output'] else @results['Get Base Notification']['Recipient']
-                  end%&gt;
+                <parameter id="to" label="To" menu="" required="true" tooltip="A comma separated list of email address to be used as the intended recipients.  Custom names can be used if any of the addresses are provided in the format: NAME &lt;ADDRESS&gt;">&lt;%=if @results.has_key?('Collect Emails') @results['Collect Emails']['output'] 
+    else 
+    @results['Get Base Notification'['Recipient']
+    end%&gt;
                 </parameter>
                 <parameter id="cc" label="CC" menu="" required="false" tooltip="A comma separated list of email address to be used as the intended CC recipients.  Custom names can be used if any of the addresses are provided in the format: NAME &lt;ADDRESS&gt;"/>
                 <parameter id="bcc" label="BCC" menu="" required="false" tooltip="A comma separated list of email address to be used as the intended BCC recipients.  Custom names can be used if any of the addresses are provided in the format: NAME &lt;ADDRESS&gt;"/>
-                <parameter id="display_name" label="Display Name (From)" menu="" required="false" tooltip="The value to be used for the Name of the sender (the email address of the sender can not be manually set).">from@yourdomain.com</parameter>
-                <parameter id="reply_to" label="Reply To" menu="" required="false" tooltip="The address of the account that email replies should be sent to.  The email address of the A custom name can be used if the address is provided in the format: NAME &lt;ADDRESS&gt;">from@yourdomain.com</parameter>
-                <parameter id="subject" label="Subject" menu="" required="false" tooltip="The subject of the email.">
-                  &lt;%= content="" content=@results['Get Base
-                  Notification']['Subject'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do @results['Dataset'][$1] end content=content.gsub(/&lt;APPCONFIG&gt;(.*?)&lt;\/APPCONFIG&gt;/) do @results['App Config'][$1] end content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do "" end content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do @results['Answers'][$1] end content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do @results['Base'][$1] end content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do @results['Misc. Inputs'][$1] end content %&gt;
-                </parameter>
-                <parameter id="htmlbody" label="HTML Body" menu="" required="false" tooltip="HTML representing the body of the email (should start with '&lt;html&gt;' and end with '&lt;/html&gt;').">
-                  &lt;%= content="" content=@results['Get Base
-                  Notification']['Subject'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do @results['Dataset'][$1] end content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do "" end content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do @results['Answers'][$1] end content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do @results['Base'][$1] end content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do @results['Misc. Inputs'][$1] end content %&gt;
-                </parameter>
-                <parameter id="textbody" label="Alternate Body (Text)" menu="" required="false" tooltip="A plaintext message that will be displayed if the recipient can't display multipart HTML emails.">
-                  &lt;%= content="" content=@results['Get Base
-                  Notification']['Subject'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do @results['Dataset'][$1] end content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do "" end content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do @results['Answers'][$1] end content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do @results['Base'][$1] end content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do @results['Misc. Inputs'][$1] end content %&gt;
+                <parameter id="display_name" label="Display Name (From)" menu="" required="false" tooltip="The value to be used for the Name of the sender (the email address of the sender can not be manually set).">donotreplylaunch@transamerica.com</parameter>
+                <parameter id="reply_to" label="Reply To" menu="" required="false" tooltip="The address of the account that email replies should be sent to.  The email address of the A custom name can be used if the address is provided in the format: NAME &lt;ADDRESS&gt;">donotreplylaunch@transamerica.com</parameter>
+                <parameter id="subject" label="Subject" menu="" required="false" tooltip="The subject of the email.">&lt;%=@results['Process Appearance - predefined - attach']['MessageSubject']%&gt;</parameter>
+                <parameter id="htmlbody" label="HTML Body" menu="" required="false" tooltip="HTML representing the body of the email (should start with '&lt;html&gt;' and end with '&lt;/html&gt;').">&lt;%=@results['Process Appearance - predefined - attach']['MessageBody']%&gt;</parameter>
+                <parameter id="textbody" label="Alternate Body (Text)" menu="" required="false" tooltip="A plaintext message that will be displayed if the recipient can't display multipart HTML emails.">&lt;%=@results['Process Appearance - predefined - attach']['MessageBody']%&gt;
                 </parameter>
                 <parameter id="attachment_file_name" label="Attachment File Name" menu="" required="false" tooltip="The name of the file that will be attached to this email message.">&lt;%=@results['Attachment']['Name']%&gt;</parameter>
                 <parameter id="attachment_file_content" label="Attachment File Content" menu="" required="false" tooltip="The content of the file that will be attached to this email message.">&lt;%=@results['Attachment']['Contents']%&gt;</parameter>
@@ -526,33 +436,27 @@
                 <task label="" type="Complete" value="">system_junction_v1_55</task>
               </dependents>
             </task>
-            <task definition_id="smtp_email_send_v1" id="smtp_email_send_v1_38" name="Send Email - Predefined Recipients" x="1389" y="752">
+            <task definition_id="smtp_email_send_v1" id="smtp_email_send_v1_38" name="Send Email - Predefined Recipients" x="1526" y="748">
               <version>1</version>
               <configured>true</configured>
               <defers>false</defers>
               <deferrable>false</deferrable>
               <visible>false</visible>
               <parameters>
-                <parameter id="from" label="From (email address)" menu="" required="true" tooltip="The email address of the simulated sender.">from@yourdomain.com</parameter>
-                <parameter id="to" label="To (email address)" menu="" required="true" tooltip="The email address of the intended recipient.">
-                  &lt;%=if @results.has_key?('Collect Emails') @results['Collect
-                  Emails']['output'] else @results['Get Base Notification']['Recipient']
-                  end%&gt; &lt;%=if @results.has_key?('Collect Emails')
-                  @results['Collect Emails']['output'] else @results['Get Base
-                  Notification']['Recipient'] end%&gt; 
+                <parameter id="from" label="From (email address)" menu="" required="true" tooltip="The email address of the simulated sender.">donotreplylaunch@transamerica.com</parameter>
+                <parameter id="to" label="To (email address)" menu="" required="true" tooltip="The email address of the intended recipient.">&lt;%=if @results.has_key?('Collect Emails') 
+    @results['Collect Emails']['output'] 
+    else 
+    @results['Get Base Notification']['Recipient']
+    end%&gt;&lt;%=if @results.has_key?('Collect Emails')
+    @results['Collect Emails']['output'] 
+    else 
+    @results['Get Base Notification']['Recipient'] 
+    end%&gt; 
                 </parameter>
-                <parameter id="subject" label="Subject" menu="" required="false" tooltip="The subject of the email.">
-                  &lt;%= content="" content=@results['Get Base
-                  Notification']['Subject'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do @results['Dataset'][$1] end content=content.gsub(/&lt;APPCONFIG&gt;(.*?)&lt;\/APPCONFIG&gt;/) do @results['App Config'][$1] end content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do "" end content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do @results['Answers'][$1] end content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do @results['Base'][$1] end content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do @results['Misc. Inputs'][$1] end content %&gt;
-                </parameter>
-                <parameter id="htmlbody" label="HTML Body" menu="" required="false" tooltip="HTML representing the body of a rich email.">
-                  &lt;%= content="" content=@results['Get Base
-                  Notification']['Subject'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do @results['Dataset'][$1] end content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do "" end content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do @results['Answers'][$1] end content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do @results['Base'][$1] end content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do @results['Misc. Inputs'][$1] end content %&gt; &lt;%= content="" content=@results['Get Base Notification']['Subject'].gsub(/&lt;DATASET&gt;(.*?)&lt;/DATASET&gt;/) do @results['Dataset'][$1] end content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;/ATTACHMENT&gt;/) do "" end content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;/ANSWER&gt;/) do @results['Answers'][$1] end content=content.gsub(/&lt;BASE&gt;(.*?)&lt;/BASE&gt;/) do @results['Base'][$1] end content=content.gsub(/&lt;MISC&gt;(.*?)&lt;/MISC&gt;/) do @results['Misc. Inputs'][$1] end content %&gt; 
-                </parameter>
-                <parameter id="textbody" label="Alternate (text) Body" menu="" required="false" tooltip="A plaintext message that will be displayed if the recipient can't display multipart HTML emails.">
-                  &lt;%= content="" content=@results['Get Base
-                  Notification']['Subject'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do @results['Dataset'][$1] end content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do "" end content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do @results['Answers'][$1] end content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do @results['Base'][$1] end content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do @results['Misc. Inputs'][$1] end content %&gt; &lt;%= content="" content=@results['Get Base Notification']['Subject'].gsub(/&lt;DATASET&gt;(.*?)&lt;/DATASET&gt;/) do @results['Dataset'][$1] end content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;/ATTACHMENT&gt;/) do "" end content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;/ANSWER&gt;/) do @results['Answers'][$1] end content=content.gsub(/&lt;BASE&gt;(.*?)&lt;/BASE&gt;/) do @results['Base'][$1] end content=content.gsub(/&lt;MISC&gt;(.*?)&lt;/MISC&gt;/) do @results['Misc. Inputs'][$1] end content %&gt; 
-                </parameter>
+                <parameter id="subject" label="Subject" menu="" required="false" tooltip="The subject of the email.">&lt;%=@results['Process Appearance - predefined']['MessageSubject']%&gt;</parameter>
+                <parameter id="htmlbody" label="HTML Body" menu="" required="false" tooltip="HTML representing the body of a rich email.">&lt;%=@results['Process Appearance - predefined']['MessageBody']%&gt;</parameter>
+                <parameter id="textbody" label="Alternate (text) Body" menu="" required="false" tooltip="A plaintext message that will be displayed if the recipient can't display multipart HTML emails.">&lt;%=@results['Process Appearance - predefined']['MessageBody']%&gt;</parameter>
               </parameters>
               <messages>
                 <message type="Create"/>
@@ -621,7 +525,7 @@
                 <task label="" type="Complete" value="">utilities_echo_v1_43</task>
               </dependents>
             </task>
-            <task definition_id="bmc_itsm7_person_retrieve_v2" id="bmc_itsm7_person_retrieve_v2_42" name="Lookup Recipient" x="739.6875" y="915.984375">
+            <task definition_id="bmc_itsm7_person_retrieve_v2" id="bmc_itsm7_person_retrieve_v2_42" name="Lookup Recipient" x="737" y="983">
               <version>2</version>
               <configured>true</configured>
               <defers>false</defers>
@@ -677,30 +581,31 @@
                 <message type="Complete"/>
               </messages>
               <dependents>
-                <task label="No Attach, Predefined Recip" type="Complete" value="!@results['Get Base Notification']['Body'].include?(&quot;&lt;ATTACHMENT&gt;&quot;) &amp;&amp; !@results['Get Base Notification']['Subject'].include?(&quot;&lt;ATTACHMENT&gt;&quot;) &amp;&amp; !@results['Get Base Notification']['Recipient'].nil?">smtp_email_send_v1_38</task>
+                
                 <task label="Attach, Predefined Recip" type="Complete" value="(@results['Get Base Notification']['Body'].include?(&quot;&lt;ATTACHMENT&gt;&quot;) || @results['Get Base Notification']['Subject'].include?(&quot;&lt;ATTACHMENT&gt;&quot;)) &amp;&amp; !@results['Get Base Notification']['Recipient'].nil?">utilities_echo_v1_35</task>
-              </dependents>
+              <task type="Complete" label="No Attach, Predefined Recip" value="!@results['Get Base Notification']['Body'].include?(&quot;&lt;ATTACHMENT&gt;&quot;) &amp;&amp; !@results['Get Base Notification']['Subject'].include?(&quot;&lt;ATTACHMENT&gt;&quot;) &amp;&amp; !@results['Get Base Notification']['Recipient'].nil?">routine_send_template_appearance_proc_v1_71</task></dependents>
             </task>
-            <task definition_id="utilities_echo_v1" id="utilities_echo_v1_46" name="Get Attachment Name - Email" x="1111" y="90">
+            <task definition_id="utilities_echo_v1" id="utilities_echo_v1_46" name="Get Attachment Name - Email" x="926" y="-132">
               <version>1</version>
               <configured>true</configured>
               <defers>false</defers>
               <deferrable>false</deferrable>
               <visible>false</visible>
               <parameters>
-                <parameter id="input" label="Input" menu="" required="true" tooltip="">
-                   &lt;%=attachmentName="" bodyText="" if @results['Get Notification
-                  Content - Email']['Body'].includes?("&lt;ATTACHMENT&gt;")
-                  bodyText=@results['Get Notification Content -
-                  Email']['Body'].split("&lt;ATTACHMENT&gt;")
-                  bodyText1=bodyText[1].split("&lt;/ATTACHMENT&gt;")
-                  attachmentName=bodyText1[0] end subjectText="" if @results['Get
-                  Notification Content -
-                  Email']['Subject'].includes?("&lt;ATTACHMENT&gt;")
-                  subjectText=@results['Get Notification Content -
-                  Email']['Subject'].split("&lt;ATTACHMENT&gt;")
-                  subjectText1=subjectText[1].split("&lt;/ATTACHMENT&gt;")
-                  attachmentName=subjectText1[0] end attachmentName %&gt; 
+                <parameter id="input" label="Input" menu="" required="true" tooltip="">&lt;%=attachmentName="" 
+    bodyText="" 
+    if @results['Get Notification Content - Email']['Body'].includes?("&lt;ATTACHMENT&gt;")
+    bodyText=@results['Get Notification Content - Email']['Body'].split("&lt;ATTACHMENT&gt;")
+    bodyText1=bodyText[1].split("&lt;/ATTACHMENT&gt;")
+    attachmentName=bodyText1[0] 
+    end 
+    subjectText="" 
+    if @results['Get Notification Content - Email']['Subject'].includes?("&lt;ATTACHMENT&gt;")
+    subjectText=@results['Get Notification Content - Email']['Subject'].split("&lt;ATTACHMENT&gt;")
+    subjectText1=subjectText[1].split("&lt;/ATTACHMENT&gt;")
+    attachmentName=subjectText1[0] 
+    end 
+    attachmentName %&gt; 
                 </parameter>
               </parameters>
               <messages>
@@ -712,7 +617,7 @@
                 <task label="" type="Complete" value="">kinetic_request_attachment_retrieve_v2_48</task>
               </dependents>
             </task>
-            <task definition_id="kinetic_request_attachment_retrieve_v2" id="kinetic_request_attachment_retrieve_v2_48" name="Attachment - Email" x="1287" y="87">
+            <task definition_id="kinetic_request_attachment_retrieve_v2" id="kinetic_request_attachment_retrieve_v2_48" name="Attachment - Email" x="1221" y="-149">
               <version>2</version>
               <configured>true</configured>
               <defers>false</defers>
@@ -730,10 +635,10 @@
                 <message type="Complete"/>
               </messages>
               <dependents>
-                <task label="" type="Complete" value="">smtp_email_with_attachment_send_v1_50</task>
-              </dependents>
+                
+              <task type="Complete" label="" value="">routine_send_template_appearance_proc_v1_69</task></dependents>
             </task>
-            <task definition_id="system_join_v1" id="system_join_v1_49" name="Email Addr Email Sent" x="1439.6875" y="254.703125">
+            <task definition_id="system_join_v1" id="system_join_v1_49" name="Email Addr Email Sent" x="1544" y="198">
               <version>1</version>
               <configured>true</configured>
               <defers>false</defers>
@@ -752,7 +657,7 @@
                 <task label="" type="Complete" value="">system_loop_tail_v1_7</task>
               </dependents>
             </task>
-            <task definition_id="smtp_email_with_attachment_send_v1" id="smtp_email_with_attachment_send_v1_50" name="Send Email - Email - Attachment" x="1454" y="89">
+            <task definition_id="smtp_email_with_attachment_send_v1" id="smtp_email_with_attachment_send_v1_50" name="Send Email - Email - Attachment" x="1615" y="-135">
               <version>1</version>
               <configured>true</configured>
               <defers>false</defers>
@@ -762,43 +667,60 @@
                 <parameter id="to" label="To" menu="" required="true" tooltip="A comma separated list of email address to be used as the intended recipients.  Custom names can be used if any of the addresses are provided in the format: NAME &lt;ADDRESS&gt;">&lt;%=@results['Email Address Loop Start']['Value']%&gt;</parameter>
                 <parameter id="cc" label="CC" menu="" required="false" tooltip="A comma separated list of email address to be used as the intended CC recipients.  Custom names can be used if any of the addresses are provided in the format: NAME &lt;ADDRESS&gt;"/>
                 <parameter id="bcc" label="BCC" menu="" required="false" tooltip="A comma separated list of email address to be used as the intended BCC recipients.  Custom names can be used if any of the addresses are provided in the format: NAME &lt;ADDRESS&gt;"/>
-                <parameter id="display_name" label="Display Name (From)" menu="" required="false" tooltip="The value to be used for the Name of the sender (the email address of the sender can not be manually set).">from@yourdomain.com</parameter>
-                <parameter id="reply_to" label="Reply To" menu="" required="false" tooltip="The address of the account that email replies should be sent to.  The email address of the A custom name can be used if the address is provided in the format: NAME &lt;ADDRESS&gt;">from@yourdomain.com</parameter>
-                <parameter id="subject" label="Subject" menu="" required="false" tooltip="The subject of the email.">
-                  &lt;%= content="" content=@results['Get Notification Content -
-                  Email']['Subject'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
-                  @results['Dataset'][$1] end
-                  content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
-                  "" end content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
-                  @results['Answers'][$1] end
-                  content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
-                  @results['Base'][$1] end
-                  content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
-                  @results['Misc. Inputs'][$1] end content %&gt;
+                <parameter id="display_name" label="Display Name (From)" menu="" required="false" tooltip="The value to be used for the Name of the sender (the email address of the sender can not be manually set).">donotreplylaunch@transamerica.com</parameter>
+                <parameter id="reply_to" label="Reply To" menu="" required="false" tooltip="The address of the account that email replies should be sent to.  The email address of the A custom name can be used if the address is provided in the format: NAME &lt;ADDRESS&gt;">donotreplylaunch@transamerica.com</parameter>
+                <parameter id="subject" label="Subject" menu="" required="false" tooltip="The subject of the email.">&lt;%= content="" 
+    content=@results['Get Notification Content - Email']['Subject'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
+       @results['Dataset'][$1] 
+    end
+    content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
+        "" 
+    end 
+    content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
+        @results['Answers'][$1] 
+    end
+    content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
+        @results['Base'][$1] 
+    end
+    content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
+        @results['Misc. Inputs'][$1] 
+    end 
+    content %&gt;
                 </parameter>
-                <parameter id="htmlbody" label="HTML Body" menu="" required="false" tooltip="HTML representing the body of the email (should start with '&lt;html&gt;' and end with '&lt;/html&gt;').">
-                  &lt;%= content="" content=@results['Get Notification Content -
-                  Email']['Body'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
-                  @results['Dataset'][$1] end
-                  content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
-                  "" end content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
-                  @results['Answers'][$1] end
-                  content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
-                  @results['Base'][$1] end
-                  content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
-                  @results['Misc. Inputs'][$1] end content %&gt;
+                <parameter id="htmlbody" label="HTML Body" menu="" required="false" tooltip="HTML representing the body of the email (should start with '&lt;html&gt;' and end with '&lt;/html&gt;').">&lt;%= content="" 
+    content=@results['Get Notification Content - Email']['Body'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
+         @results['Dataset'][$1] end
+    content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
+         "" 
+    end 
+    content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
+         @results['Answers'][$1] 
+    end
+    content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
+         @results['Base'][$1] 
+    end
+    content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
+         @results['Misc. Inputs'][$1] 
+    end 
+    content %&gt;
                 </parameter>
-                <parameter id="textbody" label="Alternate Body (Text)" menu="" required="false" tooltip="A plaintext message that will be displayed if the recipient can't display multipart HTML emails.">
-                  &lt;%= content="" content=@results['Get Notification Content -
-                  Email']['Body'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
-                  @results['Dataset'][$1] end
-                  content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
-                  "" end content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
-                  @results['Answers'][$1] end
-                  content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
-                  @results['Base'][$1] end
-                  content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
-                  @results['Misc. Inputs'][$1] end content %&gt;
+                <parameter id="textbody" label="Alternate Body (Text)" menu="" required="false" tooltip="A plaintext message that will be displayed if the recipient can't display multipart HTML emails.">&lt;%= content="" 
+    content=@results['Get Notification Content -  Email']['Body'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
+         @results['Dataset'][$1] 
+    end
+    content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
+         "" 
+    end 
+    content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
+         @results['Answers'][$1] 
+    end
+    content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
+         @results['Base'][$1] 
+    end
+    content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
+         @results['Misc. Inputs'][$1] 
+    end 
+    content %&gt;
                 </parameter>
                 <parameter id="attachment_file_name" label="Attachment File Name" menu="" required="false" tooltip="The name of the file that will be attached to this email message.">&lt;%=@results['Attachment']['Name']%&gt;</parameter>
                 <parameter id="attachment_file_content" label="Attachment File Content" menu="" required="false" tooltip="The content of the file that will be attached to this email message.">&lt;%=@results['Attachment']['Contents']%&gt;</parameter>
@@ -812,26 +734,27 @@
                 <task label="" type="Complete" value="">system_join_v1_49</task>
               </dependents>
             </task>
-            <task definition_id="utilities_echo_v1" id="utilities_echo_v1_51" name="Get Attachment Name - Login ID" x="1995" y="-22">
+            <task definition_id="utilities_echo_v1" id="utilities_echo_v1_51" name="Get Attachment Name - Login ID" x="2011" y="-182">
               <version>1</version>
               <configured>true</configured>
               <defers>false</defers>
               <deferrable>false</deferrable>
               <visible>false</visible>
               <parameters>
-                <parameter id="input" label="Input" menu="" required="true" tooltip="">
-                   &lt;%=attachmentName="" bodyText="" if @results['Get Notification
-                  Content - Login ID']['Body'].includes?("&lt;ATTACHMENT&gt;")
-                  bodyText=@results['Get Notification Content - Login
-                  ID']['Body'].split("&lt;ATTACHMENT&gt;")
-                  bodyText1=bodyText[1].split("&lt;/ATTACHMENT&gt;")
-                  attachmentName=bodyText1[0] end subjectText="" if @results['Get
-                  Notification Content - Login
-                  ID']['Subject'].includes?("&lt;ATTACHMENT&gt;")
-                  subjectText=@results['Get Notification Content - Login
-                  ID']['Subject'].split("&lt;ATTACHMENT&gt;")
-                  subjectText1=subjectText[1].split("&lt;/ATTACHMENT&gt;")
-                  attachmentName=subjectText1[0] end attachmentName %&gt; 
+                <parameter id="input" label="Input" menu="" required="true" tooltip="">&lt;%=attachmentName="" 
+    bodyText="" 
+    if @results['Get Notification Content - Login ID']['Body'].includes?("&lt;ATTACHMENT&gt;")
+    bodyText=@results['Get Notification Content - Login ID']['Body'].split("&lt;ATTACHMENT&gt;")
+    bodyText1=bodyText[1].split("&lt;/ATTACHMENT&gt;")
+    attachmentName=bodyText1[0] 
+    end 
+    subjectText="" 
+    if @results['Get Notification Content - Login ID']['Subject'].includes?("&lt;ATTACHMENT&gt;")
+    subjectText=@results['Get Notification Content - Login ID']['Subject'].split("&lt;ATTACHMENT&gt;")
+    subjectText1=subjectText[1].split("&lt;/ATTACHMENT&gt;")
+    attachmentName=subjectText1[0] 
+    end 
+    attachmentName %&gt; 
                 </parameter>
               </parameters>
               <messages>
@@ -843,7 +766,7 @@
                 <task label="" type="Complete" value="">kinetic_request_attachment_retrieve_v2_52</task>
               </dependents>
             </task>
-            <task definition_id="kinetic_request_attachment_retrieve_v2" id="kinetic_request_attachment_retrieve_v2_52" name="Attachment - Login ID" x="2144" y="-16">
+            <task definition_id="kinetic_request_attachment_retrieve_v2" id="kinetic_request_attachment_retrieve_v2_52" name="Attachment - Login ID" x="2175" y="-131">
               <version>2</version>
               <configured>true</configured>
               <defers>false</defers>
@@ -861,10 +784,10 @@
                 <message type="Complete"/>
               </messages>
               <dependents>
-                <task label="" type="Complete" value="">smtp_email_with_attachment_send_v1_53</task>
-              </dependents>
+                
+              <task type="Complete" label="" value="">routine_send_template_appearance_proc_v1_70</task></dependents>
             </task>
-            <task definition_id="smtp_email_with_attachment_send_v1" id="smtp_email_with_attachment_send_v1_53" name="Send Email - Login ID - Attachment" x="2188" y="96">
+            <task definition_id="smtp_email_with_attachment_send_v1" id="smtp_email_with_attachment_send_v1_53" name="Send Email - Login ID - Attachment" x="2583" y="99">
               <version>1</version>
               <configured>true</configured>
               <defers>false</defers>
@@ -874,44 +797,11 @@
                 <parameter id="to" label="To" menu="" required="true" tooltip="A comma separated list of email address to be used as the intended recipients.  Custom names can be used if any of the addresses are provided in the format: NAME &lt;ADDRESS&gt;">&lt;%=@results['Email Address Loop Start']['Value']%&gt;</parameter>
                 <parameter id="cc" label="CC" menu="" required="false" tooltip="A comma separated list of email address to be used as the intended CC recipients.  Custom names can be used if any of the addresses are provided in the format: NAME &lt;ADDRESS&gt;"/>
                 <parameter id="bcc" label="BCC" menu="" required="false" tooltip="A comma separated list of email address to be used as the intended BCC recipients.  Custom names can be used if any of the addresses are provided in the format: NAME &lt;ADDRESS&gt;"/>
-                <parameter id="display_name" label="Display Name (From)" menu="" required="false" tooltip="The value to be used for the Name of the sender (the email address of the sender can not be manually set).">from@yourdomain.com</parameter>
-                <parameter id="reply_to" label="Reply To" menu="" required="false" tooltip="The address of the account that email replies should be sent to.  The email address of the A custom name can be used if the address is provided in the format: NAME &lt;ADDRESS&gt;">from@yourdomain.com</parameter>
-                <parameter id="subject" label="Subject" menu="" required="false" tooltip="The subject of the email.">
-                  &lt;%= content="" content=@results['Get Notification Content - Login
-                  ID']['Subject'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
-                  @results['Dataset'][$1] end
-                  content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
-                  "" end content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
-                  @results['Answers'][$1] end
-                  content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
-                  @results['Base'][$1] end
-                  content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
-                  @results['Misc. Inputs'][$1] end content %&gt; 
-                </parameter>
-                <parameter id="htmlbody" label="HTML Body" menu="" required="false" tooltip="HTML representing the body of the email (should start with '&lt;html&gt;' and end with '&lt;/html&gt;').">
-                  &lt;%= content="" content=@results['Get Notification Content - Login
-                  ID']['Body'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
-                  @results['Dataset'][$1] end
-                  content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
-                  "" end content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
-                  @results['Answers'][$1] end
-                  content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
-                  @results['Base'][$1] end
-                  content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
-                  @results['Misc. Inputs'][$1] end content %&gt;
-                </parameter>
-                <parameter id="textbody" label="Alternate Body (Text)" menu="" required="false" tooltip="A plaintext message that will be displayed if the recipient can't display multipart HTML emails.">
-                  &lt;%= content="" content=@results['Get Notification Content - Login
-                  ID']['Body'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
-                  @results['Dataset'][$1] end
-                  content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
-                  "" end content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
-                  @results['Answers'][$1] end
-                  content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
-                  @results['Base'][$1] end
-                  content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
-                  @results['Misc. Inputs'][$1] end content %&gt;
-                </parameter>
+                <parameter id="display_name" label="Display Name (From)" menu="" required="false" tooltip="The value to be used for the Name of the sender (the email address of the sender can not be manually set).">donotreplylaunch@transamerica.com</parameter>
+                <parameter id="reply_to" label="Reply To" menu="" required="false" tooltip="The address of the account that email replies should be sent to.  The email address of the A custom name can be used if the address is provided in the format: NAME &lt;ADDRESS&gt;">donotreplylaunch@transamerica.com</parameter>
+                <parameter id="subject" label="Subject" menu="" required="false" tooltip="The subject of the email.">&lt;%=@results['Process Appearance - Login ID - Attachment']['MessageSubject']%&gt;</parameter>
+                <parameter id="htmlbody" label="HTML Body" menu="" required="false" tooltip="HTML representing the body of the email (should start with '&lt;html&gt;' and end with '&lt;/html&gt;').">&lt;%=@results['Process Appearance - Login ID - Attachment']['MessageBody']%&gt;</parameter>
+                <parameter id="textbody" label="Alternate Body (Text)" menu="" required="false" tooltip="A plaintext message that will be displayed if the recipient can't display multipart HTML emails.">&lt;%=@results['Process Appearance - Login ID - Attachment']['MessageBody']%&gt;</parameter>
                 <parameter id="attachment_file_name" label="Attachment File Name" menu="" required="false" tooltip="The name of the file that will be attached to this email message.">&lt;%=@results['Attachment - Login ID']['Name']%&gt;</parameter>
                 <parameter id="attachment_file_content" label="Attachment File Content" menu="" required="false" tooltip="The content of the file that will be attached to this email message.">&lt;%=@results['Attachment - Login ID']['Contents']%&gt;</parameter>
               </parameters>
@@ -924,7 +814,7 @@
                 <task label="" type="Complete" value="">system_join_v1_54</task>
               </dependents>
             </task>
-            <task definition_id="system_join_v1" id="system_join_v1_54" name="Email Sent - Login ID" x="2218.6875" y="256.703125">
+            <task definition_id="system_join_v1" id="system_join_v1_54" name="Email Sent - Login ID" x="2573" y="275">
               <version>1</version>
               <configured>true</configured>
               <defers>false</defers>
@@ -959,7 +849,7 @@
                 <task label="" type="Complete" value="">system_tree_return_v1_3</task>
               </dependents>
             </task>
-            <task definition_id="helper_form_notification_content_lookup_v1" id="helper_form_notification_content_lookup_v1_56" name="Get Notification Content - Email" x="1029.6875" y="198.890625">
+            <task definition_id="helper_form_notification_content_lookup_v1" id="helper_form_notification_content_lookup_v1_56" name="Get Notification Content - Email" x="934" y="178">
               <version>1</version>
               <configured>true</configured>
               <defers>false</defers>
@@ -977,10 +867,11 @@
               </messages>
               <dependents>
                 <task label="Attachment" type="Complete" value="@results['Get Notification Content - Email']['Body'].include?(&quot;&lt;ATTACHMENT&gt;&quot;) || @results['Get Notification Content - Email']['Subject'].include?(&quot;&lt;ATTACHMENT&gt;&quot;)">utilities_echo_v1_46</task>
-                <task label="No Attach" type="Complete" value="!@results['Get Notification Content - Email']['Body'].include?(&quot;&lt;ATTACHMENT&gt;&quot;) &amp;&amp; !@results['Get Notification Content - Email']['Subject'].include?(&quot;&lt;ATTACHMENT&gt;&quot;)">smtp_email_send_v1_29</task>
-              </dependents>
+                
+              
+                <task type="Complete" label="No Attach" value="!@results['Get Notification Content - Email']['Body'].include?(&quot;&lt;ATTACHMENT&gt;&quot;) &amp;&amp; !@results['Get Notification Content - Email']['Subject'].include?(&quot;&lt;ATTACHMENT&gt;&quot;)">routine_send_template_appearance_proc_v1_63</task></dependents>
             </task>
-            <task definition_id="helper_form_notification_content_lookup_v1" id="helper_form_notification_content_lookup_v1_57" name="Get Notification Content - Login ID" x="1781" y="-7">
+            <task definition_id="helper_form_notification_content_lookup_v1" id="helper_form_notification_content_lookup_v1_57" name="Get Notification Content - Login ID" x="1792" y="-181">
               <version>1</version>
               <configured>true</configured>
               <defers>false</defers>
@@ -998,10 +889,10 @@
               </messages>
               <dependents>
                 <task label="Attachment" type="Complete" value="@results['Get Notification Content - Login ID']['Body'].include?(&quot;&lt;ATTACHMENT&gt;&quot;) || @results['Get Notification Content - Login ID']['Subject'].include?(&quot;&lt;ATTACHMENT&gt;&quot;)">utilities_echo_v1_51</task>
-                <task label="No Attach" type="Complete" value="!@results['Get Notification Content - Login ID']['Body'].include?(&quot;&lt;ATTACHMENT&gt;&quot;) &amp;&amp; !@results['Get Notification Content - Login ID']['Subject'].include?(&quot;&lt;ATTACHMENT&gt;&quot;)">smtp_email_send_v1_30</task>
-              </dependents>
+                
+              <task type="Complete" label="No Attach" value="!@results['Get Notification Content - Login ID']['Body'].include?(&quot;&lt;ATTACHMENT&gt;&quot;) &amp;&amp; !@results['Get Notification Content - Login ID']['Subject'].include?(&quot;&lt;ATTACHMENT&gt;&quot;)">routine_send_template_appearance_proc_v1_66</task></dependents>
             </task>
-            <task definition_id="helper_form_language_preference_lookup_v1" id="helper_form_language_preference_lookup_v1_58" name="Retrieve Person Language Preference" x="1774.6875" y="112.890625">
+            <task definition_id="helper_form_language_preference_lookup_v1" id="helper_form_language_preference_lookup_v1_58" name="Retrieve Person Language Preference" x="1781" y="-30">
               <version>1</version>
               <configured>true</configured>
               <defers>false</defers>
@@ -1019,6 +910,377 @@
                 <task label="" type="Complete" value="">helper_form_notification_content_lookup_v1_57</task>
               </dependents>
             </task>
+          
+            <task definition_id="kinetic_request_submission_dataset_retrieve_v2" id="kinetic_request_submission_dataset_retrieve_v2_59" name="Dataset" x="218" y="639">
+          <version>2</version>
+          <configured>true</configured>
+          <defers>false</defers>
+          <deferrable>false</deferrable>
+          <visible>false</visible>
+          <parameters>
+    		<parameter id="Submission ID" label="Submission ID" menu="" required="true" tooltip="CustomerSurveyInstanceId or CustomerSurveyID on KS_CustomerSurvey">&lt;%=@inputs['Request Instance ID']%&gt;</parameter>
+        </parameters>
+                <messages>
+            <message type="Create"/>
+            <message type="Update"/>
+            <message type="Complete"/>
+          </messages>
+          <dependents>
+                    <task label="" type="Complete" value="">system_junction_v1_31</task>
+                </dependents>
+        </task>
+          
+            <task definition_id="kinetic_submission_retrieve_attribute_v1" id="kinetic_submission_retrieve_attribute_v1_60" name="Get Template ID" x="362" y="700">
+          <version>1</version>
+          <configured>true</configured>
+          <defers>false</defers>
+          <deferrable>false</deferrable>
+          <visible>false</visible>
+          <parameters>
+        <parameter id="submission_id" label="Submission ID" menu="" required="true" tooltip="Instance ID of the Submission to Retrieve">&lt;%=@inputs['Request Instance ID']%&gt;</parameter>
+        <parameter id="attribute_name" label="Attribute Field Name" menu="" required="true" tooltip="Field name to Retrieve">SurveyInstanceID</parameter>
+    
+    </parameters>
+                <messages>
+            <message type="Create"/>
+            <message type="Update"/>
+            <message type="Complete"/>
+          </messages>
+          <dependents>
+                    <task label="" type="Complete" value="">system_junction_v1_31</task>
+                </dependents>
+        </task>
+          
+            
+          
+            
+          
+            <task definition_id="routine_send_template_appearance_proc_v1" id="routine_send_template_appearance_proc_v1_63" name="Process Appearance - Email" x="1133" y="192">
+          <version>1</version>
+          <configured>true</configured>
+          <defers>true</defers>
+          <deferrable>true</deferrable>
+          <visible>false</visible>
+          <parameters>
+                <parameter id="MessageSubject" label="MessageSubject" menu="" required="true" tooltip="Subject of Message to be Processed">&lt;%= content="" 
+    content=@results['Get Notification Content - Email']['Subject'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
+    @results['Dataset'][$1] 
+    end
+    content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
+    "" 
+    end 
+    content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
+        @results['Answers'][$1] 
+    end
+    content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
+        @results['Base'][$1] 
+    end
+    content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
+        @results['Misc. Inputs'][$1] 
+    end 
+    content %&gt;</parameter>
+                <parameter id="MessageBody" label="MessageBody" menu="" required="true" tooltip="Body of Message to be Processed">&lt;%= content="" 
+    content=@results['Get Notification Content - Email']['Body'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
+        @results['Dataset'][$1] 
+    end
+    content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
+        "" 
+    end 
+    content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
+        @results['Answers'][$1] 
+    end
+    content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
+        @results['Base'][$1] 
+    end
+    content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
+        @results['Misc. Inputs'][$1] 
+    end 
+    content %&gt;
+                </parameter>
+            </parameters>
+                <messages>
+            <message type="Create"/>
+            <message type="Update"/>
+            <message type="Complete"/>
+          </messages>
+          <dependents><task type="Complete" label="" value="">smtp_email_send_v1_29</task></dependents>
+        </task>
+          
+            
+          
+            
+          
+            <task definition_id="routine_send_template_appearance_proc_v1" id="routine_send_template_appearance_proc_v1_66" name="Process Appearance - IDs" x="2201" y="55">
+          <version>1</version>
+          <configured>true</configured>
+          <defers>true</defers>
+          <deferrable>true</deferrable>
+          <visible>false</visible>
+          <parameters>
+                <parameter id="MessageSubject" label="MessageSubject" menu="" required="true" tooltip="Subject of Message to be Processed">&lt;%= content="" 
+    content=@results['Get Notification Content - Login ID']['Subject'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
+    @results['Dataset'][$1] 
+    end
+    content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
+    "" 
+    end 
+    content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
+        @results['Answers'][$1] 
+    end
+    content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
+        @results['Base'][$1] 
+    end
+    content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
+        @results['Misc. Inputs'][$1] 
+    end 
+    content %&gt;</parameter>
+                <parameter id="MessageBody" label="MessageBody" menu="" required="true" tooltip="Body of Message to be Processed">&lt;%= content="" 
+    content=@results['Get Notification Content - Login ID']['Body'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
+        @results['Dataset'][$1] 
+    end
+    content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
+        "" 
+    end 
+    content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
+        @results['Answers'][$1] 
+    end
+    content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
+        @results['Base'][$1] 
+    end
+    content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
+        @results['Misc. Inputs'][$1] 
+    end 
+    content %&gt;</parameter>
+            </parameters>
+                <messages>
+            <message type="Create"/>
+            <message type="Update"/>
+            <message type="Complete"/>
+          </messages>
+          <dependents><task type="Complete" label="" value="">smtp_email_send_v1_30</task></dependents>
+        </task>
+          
+            
+          
+            
+          
+            <task definition_id="routine_send_template_appearance_proc_v1" id="routine_send_template_appearance_proc_v1_69" name="Process Appearance - Email - Attachment" x="1459" y="-170">
+          <version>1</version>
+          <configured>true</configured>
+          <defers>true</defers>
+          <deferrable>true</deferrable>
+          <visible>false</visible>
+          <parameters>
+                <parameter id="MessageSubject" label="MessageSubject" menu="" required="true" tooltip="Subject of Message to be Processed">&lt;%= content="" 
+    content=@results['Get Notification Content - Email']['Subject'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
+    @results['Dataset'][$1] 
+    end
+    content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
+    "" 
+    end 
+    content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
+        @results['Answers'][$1] 
+    end
+    content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
+        @results['Base'][$1] 
+    end
+    content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
+        @results['Misc. Inputs'][$1] 
+    end 
+    content %&gt;</parameter>
+                <parameter id="MessageBody" label="MessageBody" menu="" required="true" tooltip="Body of Message to be Processed">&lt;%= content="" 
+    content=@results['Get Notification Content - Email']['Body'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
+        @results['Dataset'][$1] 
+    end
+    content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
+        "" 
+    end 
+    content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
+        @results['Answers'][$1] 
+    end
+    content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
+        @results['Base'][$1] 
+    end
+    content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
+        @results['Misc. Inputs'][$1] 
+    end 
+    content %&gt;</parameter>
+            </parameters>
+                <messages>
+            <message type="Create"/>
+            <message type="Update"/>
+            <message type="Complete"/>
+          </messages>
+          <dependents><task type="Complete" label="" value="">smtp_email_with_attachment_send_v1_50</task></dependents>
+        </task>
+          
+            <task definition_id="routine_send_template_appearance_proc_v1" id="routine_send_template_appearance_proc_v1_70" name="Process Appearance - Login ID - Attachment" x="2417" y="-49">
+          <version>1</version>
+          <configured>true</configured>
+          <defers>true</defers>
+          <deferrable>true</deferrable>
+          <visible>false</visible>
+          <parameters>
+                <parameter id="MessageSubject" label="MessageSubject" menu="" required="true" tooltip="Subject of Message to be Processed">&lt;%= content="" 
+    content=@results['Get Notification Content - Login ID']['Subject'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
+         @results['Dataset'][$1] 
+    end
+    content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
+         "" 
+    end 
+    content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
+         @results['Answers'][$1] 
+    end
+    content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
+         @results['Base'][$1] 
+    end
+    content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
+         @results['Misc. Inputs'][$1] 
+    end 
+    content %&gt;       </parameter>
+                <parameter id="MessageBody" label="MessageBody" menu="" required="true" tooltip="Body of Message to be Processed">&lt;%= content="" 
+    content=@results['Get Notification Content - Login ID']['Body'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
+        @results['Dataset'][$1] 
+    end
+    content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
+        "" 
+    end 
+    content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
+          @results['Answers'][$1] 
+    end
+    content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
+          @results['Base'][$1] 
+    end
+    content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
+          @results['Misc. Inputs'][$1] 
+    end 
+    content %&gt;</parameter>
+            </parameters>
+                <messages>
+            <message type="Create"/>
+            <message type="Update"/>
+            <message type="Complete"/>
+          </messages>
+          <dependents><task type="Complete" label="" value="">smtp_email_with_attachment_send_v1_53</task></dependents>
+        </task>
+          
+            <task definition_id="routine_send_template_appearance_proc_v1" id="routine_send_template_appearance_proc_v1_71" name="Process Appearance - predefined" x="1350" y="747">
+          <version>1</version>
+          <configured>true</configured>
+          <defers>true</defers>
+          <deferrable>true</deferrable>
+          <visible>false</visible>
+          <parameters>
+                <parameter id="MessageSubject" label="MessageSubject" menu="" required="true" tooltip="Subject of Message to be Processed">&lt;%= content="" 
+    content=@results['Get Base Notification']['Subject'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
+    @results['Dataset'][$1] 
+    end
+    content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
+    "" 
+    end 
+    content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
+        @results['Answers'][$1] 
+    end
+    content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
+        @results['Base'][$1] 
+    end
+    content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
+        @results['Misc. Inputs'][$1] 
+    end 
+    content %&gt;</parameter>
+                <parameter id="MessageBody" label="MessageBody" menu="" required="true" tooltip="Body of Message to be Processed">&lt;%= content="" 
+    content=@results['Get Base Notification']['Body'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
+        @results['Dataset'][$1] 
+    end
+    content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
+        "" 
+    end 
+    content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
+        @results['Answers'][$1] 
+    end
+    content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
+        @results['Base'][$1] 
+    end
+    content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
+        @results['Misc. Inputs'][$1] 
+    end 
+    content %&gt;
+                </parameter>
+            </parameters>
+                <messages>
+            <message type="Create"/>
+            <message type="Update"/>
+            <message type="Complete"/>
+          </messages>
+          <dependents><task type="Complete" label="" value="">smtp_email_send_v1_38</task></dependents>
+        </task>
+          
+            <task definition_id="routine_send_template_appearance_proc_v1" id="routine_send_template_appearance_proc_v1_72" name="Process Appearance - predefined - attach" x="1531" y="579">
+          <version>1</version>
+          <configured>true</configured>
+          <defers>true</defers>
+          <deferrable>true</deferrable>
+          <visible>false</visible>
+          <parameters>
+                <parameter id="MessageSubject" label="MessageSubject" menu="" required="true" tooltip="Subject of Message to be Processed">&lt;%= content="" 
+    content=@results['Get Base Notification']['Subject'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
+    @results['Dataset'][$1] 
+    end
+    content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
+    "" 
+    end 
+    content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
+        @results['Answers'][$1] 
+    end
+    content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
+        @results['Base'][$1] 
+    end
+    content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
+        @results['Misc. Inputs'][$1] 
+    end 
+    content %&gt;</parameter>
+                <parameter id="MessageBody" label="MessageBody" menu="" required="true" tooltip="Body of Message to be Processed">&lt;%= content="" 
+    content=@results['Get Base Notification']['Body'].gsub(/&lt;DATASET&gt;(.*?)&lt;\/DATASET&gt;/) do
+        @results['Dataset'][$1] 
+    end
+    content=content.gsub(/&lt;ATTACHMENT&gt;(.*?)&lt;\/ATTACHMENT&gt;/) do
+        "" 
+    end 
+    content=content.gsub(/&lt;ANSWER&gt;(.*?)&lt;\/ANSWER&gt;/) do
+        @results['Answers'][$1] 
+    end
+    content=content.gsub(/&lt;BASE&gt;(.*?)&lt;\/BASE&gt;/) do
+        @results['Base'][$1] 
+    end
+    content=content.gsub(/&lt;MISC&gt;(.*?)&lt;\/MISC&gt;/) do
+        @results['Misc. Inputs'][$1] 
+    end 
+    content %&gt;
+                </parameter>
+            </parameters>
+                <messages>
+            <message type="Create"/>
+            <message type="Update"/>
+            <message type="Complete"/>
+          </messages>
+          <dependents><task type="Complete" label="" value="">smtp_email_with_attachment_send_v1_37</task></dependents>
+        </task>
+          
+            <task name="Person Email Not Valid" id="utilities_echo_v1_73" definition_id="utilities_echo_v1" x="1775" y="108">
+          <version>1</version>
+          <configured>true</configured>
+          <defers>false</defers>
+          <deferrable>false</deferrable>
+          <visible>false</visible>
+          <parameters>
+            <parameter id="input" label="Input" required="true" tooltip="" menu="">&lt;%=/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i !~ @results['Retrieve Person Details']['Email']%&gt;</parameter>
+        </parameters><messages>
+            <message type="Create"/>
+            <message type="Update"/>
+            <message type="Complete"/>
+          </messages>
+          <dependents><task type="Complete" label="false" value="@results['Person Email Not Valid']['output'] == &quot;false&quot;">helper_form_language_preference_lookup_v1_58</task><task type="Complete" label="true" value="@results['Person Email Not Valid']['output'] == &quot;true&quot;">system_join_v1_54</task></dependents>
+        </task>
           </request>
         </taskTree>
 </tree>
